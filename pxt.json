@@ -8,11 +8,14 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "leds_bit.ts",
+        "motors.ts"
     ],
     "testFiles": [
         "test.ts"
     ],
     "public": false,
-    "preferredEditor": "tsprj"
+    "preferredEditor": "tsprj",
+    "installedVersion": "workspace:2384666b-d22c-41f9-3ce1-8a2f02aed071"
 }
