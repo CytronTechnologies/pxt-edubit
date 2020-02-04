@@ -1,13 +1,24 @@
+/*******************************************************************************
+ * Functions for edu:bit - LEDs Bit.
+ *
+ * Company: Cytron Technologies Sdn Bhd
+ * Website: http://www.cytron.io
+ * Email:   support@cytron.io
+ *******************************************************************************/
+
+// LED color for LEDs Bit.
+enum LedColor {
+    Red,
+    Green,
+};
+
+
+
 /**
  * Blocks for LEDs Bit.
  */
 //% weight=10 color=#ff8000 icon="\uf2db" block="LEDs Bit"
 namespace edubit_leds {
-    export enum LedColor {
-        Red,
-        Green,
-    };
-
     let redLedPin = DigitalPin.P14;
     let redLedState = 0;
 
@@ -18,8 +29,8 @@ namespace edubit_leds {
 
     /**
      * Turn on/off the LED.
-     * @param color LED color. eg: edubit_leds.LedColor.Red
-     * @param value LED value. eg: 0, 1
+     * @param color LED color. eg: LedColor.Red
+     * @param value LED state. eg: 0, 1
      */
     //% blockGap=8
     //% blockId=edubit_set_led
@@ -40,7 +51,7 @@ namespace edubit_leds {
 
     /**
      * Toggle the LED.
-     * @param color LED color. eg: edubit_leds.LedColor.Red
+     * @param color LED color. eg: LedColor.Red
      */
     //% blockGap=8
     //% blockId=edubit_toggle_led
@@ -61,7 +72,7 @@ namespace edubit_leds {
 
     /**
      * Assign new pin for the LED.
-     * @param color LED color. eg: edubit_leds.LedColor.Red
+     * @param color LED color. eg: LedColor.Red
      * @param pin New pin number. eg: P13, P14
      */
     //% advanced=true

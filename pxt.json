@@ -10,7 +10,8 @@
         "README.md",
         "main.ts",
         "leds_bit.ts",
-        "motors.ts"
+        "motors.ts",
+        "pot_bit.ts"
     ],
     "testFiles": [
         "test.ts"
