@@ -1,31 +1,51 @@
-//==============================================
-// Servos and Motor Driver
-//==============================================
+/**
+ * Blocks for edu:bit servos and motors driver.
+ */
+//% weight=10 color=#ff8000 icon="\uf2db" block="Motors & Servos"
+//% groups=['DC Motors', 'Servos']
+namespace edubit_motors {
+    // I2C slave address for PIC16F1937.
+    const I2C_ADDRESS = 0x08;
 
-// I2C slave address for PIC16F1937.
-const I2C_ADDRESS = 0x08;
+    // Register address.
+    const REG_ADD_SERVO_1 = 1;
+    const REG_ADD_SERVO_2 = 2;
+    const REG_ADD_SERVO_3 = 3;
+    const REG_ADD_M1A = 4;
+    const REG_ADD_M1B = 5;
+    const REG_ADD_M2A = 6;
+    const REG_ADD_M2B = 7;
 
-namespace edubit {
+    // Motor number.
+    export enum MotorNumber {
+        //% block=1
+        Motor1,
+
+        //% block=2
+        Motor2
+    }
+
+    // Servo number.
     // Enum number = register address.
     export enum ServoNumber {
         //% block=1
-        Servo1 = 1,
+        Servo1 = REG_ADD_SERVO_1,
 
         //% block=2
-        Servo2 = 2,
-        
+        Servo2 = REG_ADD_SERVO_2,
+
         //% block=3
-        Servo3 = 3
+        Servo3 = REG_ADD_SERVO_3
     };
 
 
 
     /**
      * Disable the servo.
-     * @param servo The number of the servo. eg: Servo1
+     * @param servo The number of the servo. eg: Servo1, Servo2
      */
-    //% subcategory="Servos"
-    //% blockGap=8
+    //% group="Servos"
+    //% blockGap=30
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
     //% servo.fieldEditor="gridpicker"
@@ -37,18 +57,36 @@ namespace edubit {
 
 
     /**
-     * Set the pulse width for servo.
-     * @param servo The number of the servo. eg: Servo1
-     * @param value Pulse width in microseconds. eg: 1500
+     * Set the position for servo (0-180 degrees).
+     * @param servo The number of the servo. eg: Servo1, Servo2
+     * @param position Servo positon. eg: 90, 180
      */
-    //% subcategory="Servos"
+    //% group="Servos"
+    //% blockGap=8
+    //% blockId=edubit_set_servo_position
+    //% block="Set servo %servo position to %position degrees"
+    //% servo.fieldEditor="gridpicker"
+    //% position.min=0 position.max=180
+    export function setServoPosition(servo: ServoNumber, position: number): void {
+        let pulseWidth = position * 20 / 18 + 50
+        i2cWrite(servo, pulseWidth);
+    }
+
+
+
+    /**
+     * Set the pulse width for servo (450-2550 microseconds).
+     * @param servo The number of the servo. eg: Servo1, Servo2
+     * @param pulseWidth Pulse width in microseconds. eg: 1500, 2000
+     */
+    //% group="Servos"
     //% blockGap=8
     //% blockId=edubit_set_servo_pulse_width
-    //% block="Set servo %servo pulse width to %value us"
+    //% block="Set servo %servo pulse width to %pulseWidth us"
     //% servo.fieldEditor="gridpicker"
-    //% value.min=450 value.max=2550
-    export function setServoPulseWidth(servo: ServoNumber, value: number): void {
-        i2cWrite(servo, value / 10);
+    //% pulseWidth.min=450 pulseWidth.max=2550
+    export function setServoPulseWidth(servo: ServoNumber, pulseWidth: number): void {
+        i2cWrite(servo, pulseWidth / 10);
     }
 
 

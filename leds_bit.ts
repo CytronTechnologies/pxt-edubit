@@ -1,26 +1,26 @@
-//==============================================
-// LEDs Bit
-//==============================================
-namespace edubit {
+/**
+ * Blocks for LEDs Bit.
+ */
+//% weight=10 color=#ff8000 icon="\uf2db" block="LEDs Bit"
+namespace edubit_led {
     export enum LedColor {
-        Green,
         Red,
+        Green,
     };
-
-    let greenLedPin = DigitalPin.P13;
-    let greenLedState = 0;
 
     let redLedPin = DigitalPin.P14;
     let redLedState = 0;
+
+    let greenLedPin = DigitalPin.P13;
+    let greenLedState = 0;
 
 
 
     /**
      * Turn on/off the LED.
-     * @param color LED color. eg: Green, Red
+     * @param color LED color. eg: Red, Green
      * @param value LED value. eg: 0, 1
      */
-    //% subcategory="LEDs Bit"
     //% blockGap=8
     //% blockId=edubit_set_led
     //% block="Set LED %color to %value"
@@ -40,10 +40,9 @@ namespace edubit {
 
     /**
      * Toggle the LED.
-     * @param color LED color. eg: Green, Red
+     * @param color LED color. eg: Red, Green
      */
-    //% subcategory="LEDs Bit"
-    //% blockGap=50
+    //% blockGap=8
     //% blockId=edubit_toggle_led
     //% block="Toggle LED %color"
     export function toggleLed(color: LedColor): void {
@@ -62,10 +61,10 @@ namespace edubit {
 
     /**
      * Assign new pin for the LED.
-     * @param color LED color. eg: Green, Red
+     * @param color LED color. eg: Red, Green
      * @param pin New pin number. eg: P13, P14
      */
-    //% subcategory="LEDs Bit"
+    //% advanced=true
     //% blockGap=8
     //% blockId=edubit_assign_new_led_pin
     //% block="Assign LED %color to pin %pin"
