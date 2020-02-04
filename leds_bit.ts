@@ -2,7 +2,7 @@
  * Blocks for LEDs Bit.
  */
 //% weight=10 color=#ff8000 icon="\uf2db" block="LEDs Bit"
-namespace edubit_led {
+namespace edubit_leds {
     export enum LedColor {
         Red,
         Green,
@@ -18,7 +18,7 @@ namespace edubit_led {
 
     /**
      * Turn on/off the LED.
-     * @param color LED color. eg: Red, Green
+     * @param color LED color. eg: edubit_leds.LedColor.Red
      * @param value LED value. eg: 0, 1
      */
     //% blockGap=8
@@ -40,7 +40,7 @@ namespace edubit_led {
 
     /**
      * Toggle the LED.
-     * @param color LED color. eg: Red, Green
+     * @param color LED color. eg: edubit_leds.LedColor.Red
      */
     //% blockGap=8
     //% blockId=edubit_toggle_led
@@ -61,7 +61,7 @@ namespace edubit_led {
 
     /**
      * Assign new pin for the LED.
-     * @param color LED color. eg: Red, Green
+     * @param color LED color. eg: edubit_leds.LedColor.Red
      * @param pin New pin number. eg: P13, P14
      */
     //% advanced=true

@@ -14,6 +14,10 @@ namespace edubit {
     pins.P15.digitalRead();
     pins.P16.digitalRead();
 
+    // Brake the motors.
+    edubit_motors.brakeMotor(edubit_motors.MotorNumber.Motor1);
+    edubit_motors.brakeMotor(edubit_motors.MotorNumber.Motor2);
+
     // Disable the servos.
     edubit_motors.disableServo(edubit_motors.ServoNumber.Servo1);
     edubit_motors.disableServo(edubit_motors.ServoNumber.Servo2);

@@ -25,6 +25,12 @@ namespace edubit_motors {
         Motor2
     }
 
+    // Motor direction.
+    export enum MotorDir {
+        Forward,
+        Backward
+    }
+
     // Servo number.
     // Enum number = register address.
     export enum ServoNumber {
@@ -41,23 +47,83 @@ namespace edubit_motors {
 
 
     /**
+     * Brake the motor
+     * @param motor The number of the motor. eg: edubit_motors.MotorNumber.Motor1
+     */
+    //% group="DC Motors"
+    //% blockGap=8
+    //% blockId=edubit_brake_motor
+    //% block="Brake motor %motor"
+    export function brakeMotor(motor: MotorNumber): void {
+        switch (motor) {
+            case MotorNumber.Motor1:
+                i2cWrite(REG_ADD_M1A, 0);
+                i2cWrite(REG_ADD_M1B, 0);
+                break;
+
+            case MotorNumber.Motor2:
+                i2cWrite(REG_ADD_M2A, 0);
+                i2cWrite(REG_ADD_M2B, 0);
+                break;
+        }
+    }
+
+
+    /**
+     * Run the motor forward or backward (Speed = 0-255).
+     * @param motor The number of the motor. eg: edubit_motors.MotorNumber.Motor1
+     * @param direction Motor direction. eg: edubit_motors.MotorDir.Forward
+     * @param speed Motor speed (0-255). eg: 0, 100, 255
+     */
+    //% group="DC Motors"
+    //% blockGap=8
+    //% blockId=edubit_run_motor
+    //% block="Run motor %motor %direction at speed %speed"
+    //% speed.min=0 speed.max=255
+    export function runMotor(motor: MotorNumber, direction: MotorDir, speed: number): void {
+        speed = edubit.limit(speed, 0, 255);
+        switch (motor) {
+            case MotorNumber.Motor1:
+                if (direction == MotorDir.Forward) {
+                    i2cWrite(REG_ADD_M1A, speed);
+                    i2cWrite(REG_ADD_M1B, 0);
+                }
+                else {
+                    i2cWrite(REG_ADD_M1A, 0);
+                    i2cWrite(REG_ADD_M1B, speed);
+                }
+                break;
+
+            case MotorNumber.Motor2:
+                if (direction == MotorDir.Forward) {
+                    i2cWrite(REG_ADD_M2A, speed);
+                    i2cWrite(REG_ADD_M2B, 0);
+                }
+                else {
+                    i2cWrite(REG_ADD_M2A, 0);
+                    i2cWrite(REG_ADD_M2B, speed);
+                }
+                break;
+        }
+    }
+
+
+    /**
      * Disable the servo.
-     * @param servo The number of the servo. eg: Servo1, Servo2
+     * @param servo The number of the servo. eg: edubit_motors.ServoNumber.Servo1
      */
     //% group="Servos"
     //% blockGap=30
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
-    //% value.min=450 value.max=2550
     export function disableServo(servo: ServoNumber): void {
         i2cWrite(servo, 0);
     }
 
 
-
     /**
      * Set the position for servo (0-180 degrees).
-     * @param servo The number of the servo. eg: Servo1, Servo2
+     * @param servo The number of the servo. eg: edubit_motors.ServoNumber.Servo1
      * @param position Servo positon. eg: 90, 180
      */
     //% group="Servos"
@@ -73,10 +139,9 @@ namespace edubit_motors {
     }
 
 
-
     /**
      * Set the pulse width for servo (450-2550 microseconds).
-     * @param servo The number of the servo. eg: Servo1, Servo2
+     * @param servo The number of the servo. eg: edubit_motors.ServoNumber.Servo1
      * @param pulseWidth Pulse width in microseconds. eg: 1500, 2000
      */
     //% group="Servos"
