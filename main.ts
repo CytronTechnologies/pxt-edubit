@@ -1,5 +1,5 @@
 /**
- * Board initialization.
+ * Board initialization and helper function.
  */
 namespace edubit {
     // Initialize the IO pins.
@@ -14,10 +14,28 @@ namespace edubit {
     pins.P15.digitalRead();
     pins.P16.digitalRead();
 
-
-
     // Disable the servos.
     edubit_motors.disableServo(edubit_motors.ServoNumber.Servo1);
     edubit_motors.disableServo(edubit_motors.ServoNumber.Servo2);
     edubit_motors.disableServo(edubit_motors.ServoNumber.Servo3);
+
+
+
+    /**
+     * Limit the range of a number.
+     * @param value The number we want to limit.
+     * @param min Minimum value of the number.
+     * @param max Maximum value of the number.
+     */
+    //% blockHidden=true
+    //% blockId=edubit_limit
+    export function limit(value: number, min: number, max: number): number {
+        if (value < min) {
+            value = min;
+        }
+        else if (value > max) {
+            value = max;
+        }
+        return value;
+    }
 }

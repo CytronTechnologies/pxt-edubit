@@ -48,7 +48,6 @@ namespace edubit_motors {
     //% blockGap=30
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
-    //% servo.fieldEditor="gridpicker"
     //% value.min=450 value.max=2550
     export function disableServo(servo: ServoNumber): void {
         i2cWrite(servo, 0);
@@ -65,9 +64,10 @@ namespace edubit_motors {
     //% blockGap=8
     //% blockId=edubit_set_servo_position
     //% block="Set servo %servo position to %position degrees"
-    //% servo.fieldEditor="gridpicker"
     //% position.min=0 position.max=180
     export function setServoPosition(servo: ServoNumber, position: number): void {
+        position = edubit.limit(position, 0, 180);
+
         let pulseWidth = position * 20 / 18 + 50
         i2cWrite(servo, pulseWidth);
     }
@@ -83,9 +83,9 @@ namespace edubit_motors {
     //% blockGap=8
     //% blockId=edubit_set_servo_pulse_width
     //% block="Set servo %servo pulse width to %pulseWidth us"
-    //% servo.fieldEditor="gridpicker"
     //% pulseWidth.min=450 pulseWidth.max=2550
     export function setServoPulseWidth(servo: ServoNumber, pulseWidth: number): void {
+        pulseWidth = edubit.limit(pulseWidth, 450, 2550);
         i2cWrite(servo, pulseWidth / 10);
     }
 
