@@ -6,7 +6,7 @@
  * Email:   support@cytron.io
  *******************************************************************************/
 
-// Analog Input Pin.
+// Possible pins for LED.
 enum LedPin {
     //% block="P13 (Green Default)"
     P13 = DigitalPin.P13,
@@ -26,7 +26,7 @@ enum LedPin {
 /**
  * Blocks for LEDs Bit.
  */
-//% weight=10 color=#ff8000 icon="\uf2db" block="LEDs Bit"
+//% weight=13 color=#ff8000 icon="\uf2db" block="LEDs Bit"
 namespace edubit_leds {
 
     // State for each pin.

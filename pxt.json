@@ -11,7 +11,8 @@
         "main.ts",
         "leds_bit.ts",
         "motors.ts",
-        "pot_bit.ts"
+        "pot_bit.ts",
+        "ir_sensor_bit.ts"
     ],
     "testFiles": [
         "test.ts"

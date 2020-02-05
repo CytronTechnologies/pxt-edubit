@@ -6,7 +6,7 @@
  * Email:   support@cytron.io
  *******************************************************************************/
 
-// Analog Input Pin.
+// Possible pins for potentiometer.
 enum PotPin {
     //% block="P1 (Default)"
     P1 = AnalogPin.P1,
@@ -17,7 +17,7 @@ enum PotPin {
 /**
  * Blocks for Potentiometer Bit.
  */
-//% weight=10 color=#ff8000 icon="\uf2db" block="Potentiometer Bit"
+//% weight=16 color=#ff8000 icon="\uf2db" block="Potentiometer Bit"
 namespace edubit_pot {
 
     /**
