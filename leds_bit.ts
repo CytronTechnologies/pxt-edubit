@@ -6,10 +6,19 @@
  * Email:   support@cytron.io
  *******************************************************************************/
 
-// LED color for LEDs Bit.
-enum LedColor {
-    Red,
-    Green,
+// Analog Input Pin.
+enum LedPin {
+    //% block="P13 (Green Default)"
+    P13 = DigitalPin.P13,
+    //% block="P14 (Red Default)"
+    P14 = DigitalPin.P14,
+    P0 = DigitalPin.P0,
+    P1 = DigitalPin.P1,
+    P2 = DigitalPin.P2,
+    P8 = DigitalPin.P8,
+    P12 = DigitalPin.P12,
+    P15 = DigitalPin.P15,
+    P16 = DigitalPin.P16,
 };
 
 
@@ -19,74 +28,75 @@ enum LedColor {
  */
 //% weight=10 color=#ff8000 icon="\uf2db" block="LEDs Bit"
 namespace edubit_leds {
-    let redLedPin = DigitalPin.P14;
-    let redLedState = 0;
 
-    let greenLedPin = DigitalPin.P13;
-    let greenLedState = 0;
+    // State for each pin.
+    let pinsState = {
+        P0: 0,
+        P1: 0,
+        P2: 0,
+        P8: 0,
+        P12: 0,
+        P13: 0,
+        P14: 0,
+        P15: 0,
+        P16: 0
+    };
 
 
 
     /**
      * Turn on/off the LED.
-     * @param color LED color. eg: LedColor.Red
-     * @param value LED state. eg: 0, 1
+     * @param pin LED pin. eg: LedPin.P13
+     * @param state LED state. eg: 0, 1
      */
     //% blockGap=8
     //% blockId=edubit_set_led
-    //% block="Set LED %color to %value"
-    //% value.min=0 value.max=1
-    export function setLed(color: LedColor, value: number): void {
-        if (color == LedColor.Green) {
-            greenLedState = value;
-            pins.digitalWritePin(greenLedPin, value);
+    //% block="Set LED %pin to %state"
+    //% state.min=0 state.max=1
+    export function setLed(pin: LedPin, state: number): void {
+        // Save the pin state.
+        switch (pin) {
+            case LedPin.P0: pinsState.P0 = state; break;
+            case LedPin.P1: pinsState.P1 = state; break;
+            case LedPin.P2: pinsState.P2 = state; break;
+            case LedPin.P8: pinsState.P8 = state; break;
+            case LedPin.P12: pinsState.P12 = state; break;
+            case LedPin.P13: pinsState.P13 = state; break;
+            case LedPin.P14: pinsState.P14 = state; break;
+            case LedPin.P15: pinsState.P15 = state; break;
+            case LedPin.P16: pinsState.P16 = state; break;
         }
-        else if (color == LedColor.Red) {
-            redLedState = value;
-            pins.digitalWritePin(redLedPin, value);
-        }
+
+        // Write to pin.
+        pins.digitalWritePin(<any>pin, state);
     }
 
 
 
     /**
      * Toggle the LED.
-     * @param color LED color. eg: LedColor.Red
+     * @param pin LED pin. eg: LedPin.P13
      */
     //% blockGap=8
     //% blockId=edubit_toggle_led
-    //% block="Toggle LED %color"
-    export function toggleLed(color: LedColor): void {
-        if (color == LedColor.Green) {
-            greenLedState ^= 1;
-            pins.digitalWritePin(greenLedPin, greenLedState);
-        }
-        else if (color == LedColor.Red) {
-            redLedState ^= 1;
-            pins.digitalWritePin(redLedPin, redLedState);
+    //% block="Toggle LED %pin"
+    export function toggleLed(pin: LedPin): void {
+        // Read the pin state.
+        let state = 0;
+        switch (pin) {
+            case LedPin.P0: state = pinsState.P0; break;
+            case LedPin.P1: state = pinsState.P1; break;
+            case LedPin.P2: state = pinsState.P2; break;
+            case LedPin.P8: state = pinsState.P8; break;
+            case LedPin.P12: state = pinsState.P12; break;
+            case LedPin.P13: state = pinsState.P13; break;
+            case LedPin.P14: state = pinsState.P14; break;
+            case LedPin.P15: state = pinsState.P15; break;
+            case LedPin.P16: state = pinsState.P16; break;
         }
 
-    }
-
-
-
-    /**
-     * Assign new pin for the LED.
-     * @param color LED color. eg: LedColor.Red
-     * @param pin New pin number. eg: P13, P14
-     */
-    //% advanced=true
-    //% blockGap=8
-    //% blockId=edubit_assign_new_led_pin
-    //% block="Assign LED %color to pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    export function assignNewLedPin(color: LedColor, pin: DigitalPin): void {
-        if (color == LedColor.Green) {
-            greenLedPin = pin;
-        }
-        else if (color == LedColor.Red) {
-            redLedPin = pin;
-        }
+        // Toggle the state and write to pin.
+        state ^= 1;
+        setLed(pin, state);
     }
 }

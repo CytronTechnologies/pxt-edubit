@@ -8,9 +8,9 @@
 
 // Analog Input Pin.
 enum PotPin {
-    P0 = AnalogPin.P0,
     //% block="P1 (Default)"
     P1 = AnalogPin.P1,
+    P0 = AnalogPin.P0,
     P2 = AnalogPin.P2
 }
 
