@@ -36,11 +36,13 @@ namespace edubit_pot {
     // Event type.
     let eventType = 0;
 
-    // Array for event handler, compare type, threshold and pin number.
-    let handlersArray: Action[] = [];
+    // Array for compare type, threshold and pin number.
     let compareTypesArray: PotCompareType[] = [];
     let thresholdsArray: number[] = [];
     let pinsArray: PotPin[] = [];
+
+    // Array for old compare result.
+    let oldCompareResult: boolean[] = [];
 
 
 
@@ -72,13 +74,15 @@ namespace edubit_pot {
         eventType++;
 
         // Add the event info to the arrays.
-        handlersArray.push(handler);
         compareTypesArray.push(compareType);
         thresholdsArray.push(threshold);
         pinsArray.push(pin);
 
+        // Create a placeholder for the old compare result.
+        oldCompareResult.push(false);
+
         // Register the event.
-        //control.onEvent(getEventSource(pin), eventType, handlersArray[eventType - 1]);
+        control.onEvent(getEventSource(pin), eventType, handler);
 
         // Create a function in background if haven't done so.
         // This function will check for pot value and raise the event if the condition is met.
@@ -86,24 +90,22 @@ namespace edubit_pot {
             control.inBackground(function () {
 
                 while (true) {
+                    // Loop for all the event created.
                     for (let i = 0; i < eventType; i++) {
+
                         // Check if the condition is met.
                         if (compare(readPotValue(pinsArray[i]), compareTypesArray[i], thresholdsArray[i]) == true) {
-                            // Raise the event.
-                            control.raiseEvent(getEventSource(pinsArray[i]), i + 1);
-
-                            if (i == 0) {
-                                pins.digitalWritePin(DigitalPin.P13, 1);
+                            // Raise the event if the compare result changed from false to true.
+                            if (oldCompareResult[i] == false) {
+                                control.raiseEvent(getEventSource(pinsArray[i]), i + 1);
                             }
 
-                            else if (i == 1) {
-                                pins.digitalWritePin(DigitalPin.P14, 1);
-                            }
-
-                            // Wait until the condition is not met to avoid triggering repeatedly.
-                            while (compare(readPotValue(pinsArray[i]), compareTypesArray[i], thresholdsArray[i]) == true) {
-                                basic.pause(20)
-                            }
+                            // Save old compare result.
+                            oldCompareResult[i] = true;
+                        }
+                        else {
+                            // Save old compare result.
+                            oldCompareResult[i] = false;
                         }
                         basic.pause(20)
                     }
