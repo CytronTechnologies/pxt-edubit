@@ -55,7 +55,7 @@ namespace edubit_pot {
     //% block="Read potentiometer || at pin %pin"
     //% pin.fieldEditor="gridpicker"
     export function readPotValue(pin: PotPin = PotPin.P1): number {
-        return pins.analogReadPin(<any>pin);
+        return pins.analogReadPin(<number>pin);
     }
 
 

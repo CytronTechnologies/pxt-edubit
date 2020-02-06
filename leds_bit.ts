@@ -68,7 +68,7 @@ namespace edubit_leds {
         }
 
         // Write to pin.
-        pins.digitalWritePin(<any>pin, state);
+        pins.digitalWritePin(<number>pin, state);
     }
 
 

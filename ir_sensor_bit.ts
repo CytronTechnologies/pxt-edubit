@@ -20,20 +20,6 @@ enum IrSensorPin {
     P16 = DigitalPin.P16,
 }
 
-// Possible source for IR sensor event.
-enum IrEventSource {
-    //% block="P8 (Default)"
-    P8 = EventBusSource.MICROBIT_ID_IO_P8,
-    P0 = EventBusSource.MICROBIT_ID_IO_P0,
-    P1 = EventBusSource.MICROBIT_ID_IO_P1,
-    P2 = EventBusSource.MICROBIT_ID_IO_P2,
-    P12 = EventBusSource.MICROBIT_ID_IO_P12,
-    P13 = EventBusSource.MICROBIT_ID_IO_P13,
-    P14 = EventBusSource.MICROBIT_ID_IO_P14,
-    P15 = EventBusSource.MICROBIT_ID_IO_P15,
-    P16 = EventBusSource.MICROBIT_ID_IO_P16,
-}
-
 // IR Event Type.
 enum IrEventType {
     //% block="Not Triggered"
@@ -87,27 +73,38 @@ namespace edubit_ir_sensor {
     /**
     * Do something when IR sensor is triggered / not triggered.
     * @param event Event type. eg: IrEventType.Rise
-    * @param src Event source. eg: IrEventSource.P8
+    * @param pin Pin number for IR sensor. eg: IrSensorPin.P8
     */
     //% blockGap=8
     //% blockId=edubit_ir_sensor_event
     //% block="On IR sensor %event at pin %src"
     //% src.fieldEditor="gridpicker"
-    export function onIrSensorEvent(event: IrEventType, src: IrEventSource, handler: Action) {
-        // Set the event type for the corresponding pin.
-        switch (src) {
-            case IrEventSource.P0: pins.setEvents(DigitalPin.P0, PinEventType.Edge); break;
-            case IrEventSource.P1: pins.setEvents(DigitalPin.P1, PinEventType.Edge); break;
-            case IrEventSource.P2: pins.setEvents(DigitalPin.P2, PinEventType.Edge); break;
-            case IrEventSource.P8: pins.setEvents(DigitalPin.P8, PinEventType.Edge); break;
-            case IrEventSource.P12: pins.setEvents(DigitalPin.P12, PinEventType.Edge); break;
-            case IrEventSource.P13: pins.setEvents(DigitalPin.P13, PinEventType.Edge); break;
-            case IrEventSource.P14: pins.setEvents(DigitalPin.P14, PinEventType.Edge); break;
-            case IrEventSource.P15: pins.setEvents(DigitalPin.P15, PinEventType.Edge); break;
-            case IrEventSource.P16: pins.setEvents(DigitalPin.P16, PinEventType.Edge); break;
-        }
+    export function onIrSensorEvent(event: IrEventType, pin: IrSensorPin, handler: Action) {
+        // Set the event type as edge triggered.
+        pins.setEvents(<number>pin, PinEventType.Edge);
 
         // Register the event.
-        control.onEvent(<number>src, <number>event, handler);
+        control.onEvent(getEventSource(pin), <number>event, handler);
+    }
+
+
+
+    /**
+    * Get the event source based on pin number.
+    */
+    function getEventSource(pin: IrSensorPin): EventBusSource {
+        // Get the event source based on pin number.
+        switch (pin) {
+            case IrSensorPin.P0: return EventBusSource.MICROBIT_ID_IO_P0;
+            case IrSensorPin.P1: return EventBusSource.MICROBIT_ID_IO_P1;
+            case IrSensorPin.P2: return EventBusSource.MICROBIT_ID_IO_P2;
+            case IrSensorPin.P8: return EventBusSource.MICROBIT_ID_IO_P8;
+            case IrSensorPin.P12: return EventBusSource.MICROBIT_ID_IO_P12;
+            case IrSensorPin.P13: return EventBusSource.MICROBIT_ID_IO_P13;
+            case IrSensorPin.P14: return EventBusSource.MICROBIT_ID_IO_P14;
+            case IrSensorPin.P15: return EventBusSource.MICROBIT_ID_IO_P15;
+            case IrSensorPin.P16: return EventBusSource.MICROBIT_ID_IO_P16;
+        }
+        return null;
     }
 }
