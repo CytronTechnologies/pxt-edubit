@@ -12,40 +12,145 @@ enum PotPin {
     P1 = AnalogPin.P1,
     P0 = AnalogPin.P0,
     P2 = AnalogPin.P2
-}
+};
+
+// Comparison type.
+enum PotCompareType {
+    //% block=">"
+    MoreThan = 0,
+
+    //% block="<"
+    LessThan = 1
+};
+
+
 
 /**
  * Blocks for Potentiometer Bit.
  */
 //% weight=16 color=#ff8000 icon="\uf2db" block="Potentiometer Bit"
 namespace edubit_pot {
+    // Indicate whether background function has been created.
+    let bgFunctionCreated = false;
+
+    // Event type.
+    let eventType = 0;
+
+    // Array for event handler, compare type, threshold and pin number.
+    let handlersArray: Action[] = [];
+    let compareTypesArray: PotCompareType[] = [];
+    let thresholdsArray: number[] = [];
+    let pinsArray: PotPin[] = [];
+
+
 
     /**
      * Read potentiometer value (0-1023).
      * @param pin Pin number for potentiometer. eg: PotPin.P1
      */
-    //% blockGap=8
+    //% blockGap=30
     //% blockId=edubit_read_pot_value
-    //% block="Read potentiometer value (0-1023) || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
+    //% block="Read potentiometer || at pin %pin"
+    //% pin.fieldEditor="gridpicker"
     export function readPotValue(pin: PotPin = PotPin.P1): number {
         return pins.analogReadPin(<any>pin);
     }
 
 
     /**
-     * Read potentiometer voltage in millivolts (0-3300).
-     * @param pin Pin number for potentiometer. eg: PotPin.P1
-     */
+    * Registers code to run when a potentiometer event is detected.
+    * @param compareType More than or less than. eg: PotCompareType.MoreThan
+    * @param threshold The value to compare with. eg: 0, 512, 1023
+    */
     //% blockGap=8
-    //% blockId=edubit_read_pot_voltage
-    //% block="Read potentiometer voltage (millivolts) || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    export function readPotVoltage(pin: PotPin = PotPin.P1): number {
-        let raw = pins.analogReadPin(<any>pin);
-        let mv = raw * 3300 / 1023;
-        return mv;
+    //% blockId=edubit_potentiometer_event
+    //% block="On potentiometer %compareType %threshold at pin %pin"
+    //% pin.fieldEditor="gridpicker"
+    //% threshold.min=0 threshold.max=1023
+    export function onEvent(compareType: PotCompareType, threshold: number, pin: PotPin, handler: Action) {
+        // Use a new event type everytime a new event is create.
+        eventType++;
+
+        // Add the event info to the arrays.
+        handlersArray.push(handler);
+        compareTypesArray.push(compareType);
+        thresholdsArray.push(threshold);
+        pinsArray.push(pin);
+
+        // Register the event.
+        //control.onEvent(getEventSource(pin), eventType, handlersArray[eventType - 1]);
+
+        // Create a function in background if haven't done so.
+        // This function will check for pot value and raise the event if the condition is met.
+        if (bgFunctionCreated == false) {
+            control.inBackground(function () {
+
+                while (true) {
+                    for (let i = 0; i < eventType; i++) {
+                        // Check if the condition is met.
+                        if (compare(readPotValue(pinsArray[i]), compareTypesArray[i], thresholdsArray[i]) == true) {
+                            // Raise the event.
+                            control.raiseEvent(getEventSource(pinsArray[i]), i + 1);
+
+                            if (i == 0) {
+                                pins.digitalWritePin(DigitalPin.P13, 1);
+                            }
+
+                            else if (i == 1) {
+                                pins.digitalWritePin(DigitalPin.P14, 1);
+                            }
+
+                            // Wait until the condition is not met to avoid triggering repeatedly.
+                            while (compare(readPotValue(pinsArray[i]), compareTypesArray[i], thresholdsArray[i]) == true) {
+                                basic.pause(20)
+                            }
+                        }
+                        basic.pause(20)
+                    }
+                }
+
+            });
+
+            bgFunctionCreated = true;
+        }
+
     }
+
+
+
+    /**
+    * Get the event source based on pin number.
+    */
+    function getEventSource(pin: PotPin): EventBusSource {
+        // Get the event source based on pin number.
+        switch (pin) {
+            case PotPin.P0: return EventBusSource.MICROBIT_ID_IO_P0;
+            case PotPin.P1: return EventBusSource.MICROBIT_ID_IO_P1;
+            case PotPin.P2: return EventBusSource.MICROBIT_ID_IO_P2;
+        }
+        return null;
+    }
+
+
+    /**
+    * Compare a value with threshold and return the result based on comparison type.
+    */
+    function compare(value: number, compareType: PotCompareType, threshold: number): boolean {
+        let result = false;
+        switch (compareType) {
+            case PotCompareType.MoreThan:
+                if (value > threshold) {
+                    result = true;
+                }
+                break;
+
+            case PotCompareType.LessThan:
+                if (value < threshold) {
+                    result = true;
+                }
+                break;
+        }
+        return result;
+    }
+
 }

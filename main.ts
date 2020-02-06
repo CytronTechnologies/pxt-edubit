@@ -2,18 +2,6 @@
  * Board initialization and helper function.
  */
 namespace edubit {
-    // Initialize the IO pins.
-    pins.P0.digitalRead();
-    pins.P1.digitalRead();
-    pins.P2.digitalRead();
-
-    pins.P8.digitalRead();
-    pins.P12.digitalRead();
-    pins.P13.digitalRead();
-    pins.P14.digitalRead();
-    pins.P15.digitalRead();
-    pins.P16.digitalRead();
-
     // Brake the motors.
     edubit_motors.brakeMotor(Motor.M1);
     edubit_motors.brakeMotor(Motor.M2);
