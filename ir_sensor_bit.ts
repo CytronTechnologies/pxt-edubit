@@ -32,7 +32,7 @@ enum IrEventType {
 
 
 /**
- * Blocks for Potentiometer Bit.
+ * Blocks for IR Sensor Bit.
  */
 //% weight=14 color=#ff8000 icon="\uf2db" block="IR Sensor Bit"
 namespace edubit_ir_sensor {
@@ -44,10 +44,9 @@ namespace edubit_ir_sensor {
     //% blockGap=8
     //% blockId=edubit_read_ir_sensor
     //% block="Read IR sensor || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    export function readIrSensorState(pin: IrSensorPin = IrSensorPin.P8): number {
-        return pins.digitalReadPin(<any>pin);
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
+    export function readIrSensor(pin: IrSensorPin = IrSensorPin.P8): number {
+        return pins.digitalReadPin(<number>pin);
     }
 
 
@@ -58,10 +57,9 @@ namespace edubit_ir_sensor {
     //% blockGap=30
     //% blockId=edubit_is_ir_sensor_triggered
     //% block="IR sensor's triggered || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function isIrSensorTriggered(pin: IrSensorPin = IrSensorPin.P8): boolean {
-        if (pins.digitalReadPin(<any>pin) != 0) {
+        if (pins.digitalReadPin(<number>pin) != 0) {
             return true;
         }
         else {
@@ -77,8 +75,8 @@ namespace edubit_ir_sensor {
     */
     //% blockGap=8
     //% blockId=edubit_ir_sensor_event
-    //% block="On IR sensor %event at pin %src"
-    //% src.fieldEditor="gridpicker"
+    //% block="On IR sensor %event at pin %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function onIrSensorEvent(event: IrEventType, pin: IrSensorPin, handler: Action) {
         // Set the event type as edge triggered.
         pins.setEvents(<number>pin, PinEventType.Edge);

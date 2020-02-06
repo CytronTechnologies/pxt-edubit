@@ -52,6 +52,7 @@ namespace edubit_leds {
     //% blockGap=8
     //% blockId=edubit_set_led
     //% block="Set LED %pin to %state"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     //% state.min=0 state.max=1
     export function setLed(pin: LedPin, state: number): void {
         // Save the pin state.
@@ -80,6 +81,7 @@ namespace edubit_leds {
     //% blockGap=8
     //% blockId=edubit_toggle_led
     //% block="Toggle LED %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function toggleLed(pin: LedPin): void {
         // Read the pin state.
         let state = 0;
