@@ -34,7 +34,7 @@ enum IrEventType {
 /**
  * Blocks for IR Sensor Bit.
  */
-//% weight=14 color=#ff8000 icon="\uf2db" block="IR Sensor Bit"
+//% weight=14 color=#ff8000 icon="\uf2db" block="IR Sensor"
 namespace edubit_ir_sensor {
 
     /**
@@ -75,7 +75,7 @@ namespace edubit_ir_sensor {
     */
     //% blockGap=8
     //% blockId=edubit_ir_sensor_event
-    //% block="On IR sensor %event at pin %pin"
+    //% block="On IR sensor's %event at pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function onIrSensorEvent(event: IrEventType, pin: IrSensorPin, handler: Action) {
         // Set the event type as edge triggered.

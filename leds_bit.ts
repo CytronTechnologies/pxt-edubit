@@ -26,7 +26,7 @@ enum LedPin {
 /**
  * Blocks for LEDs Bit.
  */
-//% weight=13 color=#ff8000 icon="\uf2db" block="LEDs Bit"
+//% weight=13 color=#ff8000 icon="\uf2db" block="Red & Green LEDs"
 namespace edubit_leds {
 
     // State for each pin.
