@@ -1,39 +1,77 @@
+const COLOR_BIT_LENGTH = 4;
+
 /**
- * Blocks for edu:bit NeoPixel Bit.
+ * Blocks for Color Bit.
  */
-//% weight=11 color=#ff8000 icon="\uf2db" block="NeoPixel (edu:bit)"
-namespace edubit_neopixel {
-    /**
-     * Create a new NeoPixel driver for edu:bit
-     *
-    //% blockGap=8
-    //% blockId="edubit_create_neopixel"
-    //% block="edu:bit NeoPixel"
-    export function createEdubitNeoPixel(): neopixel.Strip {
-        let strip = new neopixel.Strip();
-        let stride = 3;
-        strip.buf = pins.createBuffer(4 * stride);
-        strip.start = 0;
-        strip._length = 4;
-        strip._mode = NeoPixelMode.RGB;
-        strip._matrixWidth = 0;
-        strip.setBrightness(64);
-        strip.setPin(DigitalPin.P15);
-        return strip;
+//% weight=11 color=#ff8000 icon="\uf2db" block="Color Bit"
+namespace edubit_color {
+    // Showing rainbow color?
+    let isRainbow = false;
+
+    // Colors array for each LED.
+    let colorsArray: number[] = [];
+    for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
+        colorsArray.push(0);
     }
-*/
 
-    let edubitNeoPixel = neopixel.create(DigitalPin.P15, 4, NeoPixelMode.RGB);
+    // Create a Neo Pixel object for Color Bit.
+    let colorBit = neopixel.create(DigitalPin.P15, 4, NeoPixelMode.RGB);
+    colorBit.clear();
+
+    // Reduce the default brightness.
+    colorBit.setBrightness(25);
+
+
 
     /**
-     * Shows a color on all LEDs. 
-     * @param rgb RGB color of the LED
+     * Shows the same color on all LEDs. 
+     * @param color RGB color of the LED. eg: NeoPixelColors.Red
      */
     //% blockGap=8
-    //% blockId="edubit_neopixel_show_color"
-    //% block="NeoPixel show color %rgb=neopixel_colors"
-    export function showColor(rgb: number): void {
-        edubitNeoPixel.showColor(rgb);
+    //% blockId="edubit_colorbit_show_color"
+    //% block="ColorBit show color %rgb"
+    export function showColor(color: NeoPixelColors): void {
+        isRainbow = false;
+        for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
+            colorsArray[i] = <number>color;
+        }
+        colorBit.showColor(<number>color);
+    }
+
+
+    /**
+     * Shows a rainbow pattern on all LEDs.
+     */
+    //% blockGap=8
+    //% blockId="edubit_colorbit_show_rainbow"
+    //% block="ColorBit show rainbow"
+    export function showRainbow(): void {
+        isRainbow = true;
+        colorBit.showRainbow(1, 360 / COLOR_BIT_LENGTH * (COLOR_BIT_LENGTH - 1));
+    }
+
+
+    /**
+     * Set the brightness of the Color Bit (0-255).
+     * @param brightness LED brightness. eg: 50, 100
+     */
+    //% blockGap=8
+    //% blockId="edubit_colorbit_set_brightness"
+    //% block="ColorBit set brightness %brightness"
+    //% brightness.min=0 brightness.max=255
+    export function setBrightness(brightness: number): void {
+        colorBit.setBrightness(brightness);
+
+        // Restore the original color.
+        if (isRainbow) {
+            colorBit.showRainbow(1, 360 / COLOR_BIT_LENGTH * (COLOR_BIT_LENGTH - 1));
+        }
+        else {
+            for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
+                colorBit.setPixelColor(i, colorsArray[i]);
+            }
+            colorBit.show();
+        }
     }
 }
 
