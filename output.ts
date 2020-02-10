@@ -78,7 +78,7 @@ namespace edubit_output {
      * Toggle the output.
      * @param pin Output pin. eg: OutputPin.GREEN_LED
      */
-    //% blockGap=30
+    //% blockGap=8
     //% blockId=edubit_toggle_output
     //% block="Toggle output %pin"
     export function toggleOutput(pin: OutputPin): void {
@@ -99,30 +99,6 @@ namespace edubit_output {
         // Toggle the state and write to pin.
         state ^= 1;
         setOutput(<number>pin, state);
-    }
-
-
-    /**
-    * Return output state (0 or 1).
-    * @param pin Output pin. eg: OutputPin.GREEN_LED
-    */
-    //% blockGap=8
-    //% blockId=edubit_read_output
-    //% block="Read output %pin"
-    export function readOutput(pin: OutputPin): number {
-        let state = 0;
-        switch (<number>pin) {
-            case <number>DigitalPin.P0: state = pinsState.P0; break;
-            case <number>DigitalPin.P1: state = pinsState.P1; break;
-            case <number>DigitalPin.P2: state = pinsState.P2; break;
-            case <number>DigitalPin.P8: state = pinsState.P8; break;
-            case <number>DigitalPin.P12: state = pinsState.P12; break;
-            case <number>DigitalPin.P13: state = pinsState.P13; break;
-            case <number>DigitalPin.P14: state = pinsState.P14; break;
-            case <number>DigitalPin.P15: state = pinsState.P15; break;
-            case <number>DigitalPin.P16: state = pinsState.P16; break;
-        }
-        return state;
     }
 }
 

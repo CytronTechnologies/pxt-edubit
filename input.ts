@@ -45,7 +45,9 @@ enum AnalogInputCompareType {
 
 // Digital input trigger state.
 enum DigitalInputTriggerState {
+    //% block="High"
     High = 1,
+    //% block="Low"
     Low = 0,
 }
 
@@ -126,7 +128,6 @@ namespace edubit_input {
     //% blockGap=8
     //% blockId=edubit_on_analog_input_event
     //% block="On analog input %pin %compareType %threshold"
-    //% pin.fieldEditor="gridpicker"
     //% threshold.min=0 threshold.max=1023
     export function onAnalogInputEvent(pin: AnalogInputPin, compareType: AnalogInputCompareType, threshold: number, handler: Action): void {
         // Use a new event type everytime a new event is create.
