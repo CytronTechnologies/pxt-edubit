@@ -28,7 +28,7 @@ enum OutputPin {
 /**
  * Blocks for output.
  */
-//% weight=20 color=#ff8000 icon="\uf2db" block="Output"
+//% weight=20 color=#ff8000 icon="\uf061" block="Output"
 namespace edubit_output {
 
     // State for each pin.

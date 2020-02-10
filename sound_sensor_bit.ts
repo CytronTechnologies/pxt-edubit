@@ -42,7 +42,7 @@ enum SoundSensorCompareType {
 /**
  * Blocks for Sound Sensor Bit.
  */
-//% weight=15 color=#ff8000 icon="\uf2db" block="Sound Sensor"
+//% weight=15 color=#ff8000 icon="\uf130" block="Sound Sensor"
 //% groups=['Analog Input', 'Digital Input']
 namespace edubit_sound_sensor {
 

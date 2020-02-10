@@ -28,7 +28,7 @@ const COLOR_BIT_LENGTH = 4;
 /**
  * Blocks for Color Bit.
  */
-//% weight=11 color=#ff8000 icon="\uf2db" block="Color Bit"
+//% weight=11 color=#ff8000 icon="\uf110" block="Color Bit"
 namespace edubit_color {
     // Colors array for each LED.
     let colorsArray: number[] = [];
