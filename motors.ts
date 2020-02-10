@@ -43,7 +43,7 @@ enum Servo {
 /**
  * Blocks for edu:bit servos and motors driver.
  */
-//% weight=10 color=#ff8000 icon="\uf2db" block="Motors & Servos"
+//% weight=10 color=#ff8000 icon="\uf085" block="Motors & Servos"
 //% groups=['DC Motors', 'Servos']
 namespace edubit_motors {
 

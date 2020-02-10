@@ -34,7 +34,7 @@ enum IrEventType {
 /**
  * Blocks for IR Sensor Bit.
  */
-//% weight=14 color=#ff8000 icon="\uf2db" block="IR Sensor"
+//% weight=14 color=#ff8000 icon="\uf05b" block="IR Sensor"
 namespace edubit_ir_sensor {
 
     /**

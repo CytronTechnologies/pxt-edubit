@@ -28,7 +28,7 @@ enum PotCompareType {
 /**
  * Blocks for Potentiometer Bit.
  */
-//% weight=16 color=#ff8000 icon="\uf2db" block="Potentiometer"
+//% weight=16 color=#ff8000 icon="\uf01e" block="Potentiometer"
 namespace edubit_pot {
     // Indicate whether background function has been created.
     let bgFunctionCreated = false;

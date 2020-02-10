@@ -45,8 +45,10 @@ enum AnalogInputCompareType {
 
 // Digital input trigger state.
 enum DigitalInputTriggerState {
-    HIGH = 1,
-    LOW = 0,
+    //% block="High"
+    High = 1,
+    //% block="Low"
+    Low = 0,
 }
 
 
@@ -54,7 +56,7 @@ enum DigitalInputTriggerState {
 /**
  * Blocks for input
  */
-//% weight=21 color=#ff8000 icon="\uf2db" block="Input"
+//% weight=21 color=#ff8000 icon="\uf060" block="Input"
 //% groups=['Analog Input', 'Digital Input']
 namespace edubit_input {
     // Indicate whether background function has been created.
@@ -126,7 +128,6 @@ namespace edubit_input {
     //% blockGap=8
     //% blockId=edubit_on_analog_input_event
     //% block="On analog input %pin %compareType %threshold"
-    //% pin.fieldEditor="gridpicker"
     //% threshold.min=0 threshold.max=1023
     export function onAnalogInputEvent(pin: AnalogInputPin, compareType: AnalogInputCompareType, threshold: number, handler: Action): void {
         // Use a new event type everytime a new event is create.
@@ -214,7 +215,7 @@ namespace edubit_input {
     /**
      * Return true if digital input is triggered.
      * @param pin Pin number for digital input. eg: DigitalInputPin.IR
-     * @param triggerState Digital input trigger state. eg: DigitalInputTriggerState.HIGH
+     * @param triggerState Digital input trigger state. eg: DigitalInputTriggerState.High
      */
     //% group="Digital Input"
     //% blockGap=30
@@ -233,7 +234,7 @@ namespace edubit_input {
     /**
     * Do something when digital input is triggered.
     * @param pin Pin number for digital input. eg: DigitalInputPin.IR
-    * @param triggerState Digital input trigger state. eg: DigitalInputTriggerState.HIGH
+    * @param triggerState Digital input trigger state. eg: DigitalInputTriggerState.High
     */
     //% group="Digital Input"
     //% blockGap=8
@@ -245,7 +246,7 @@ namespace edubit_input {
 
         // Get the event type.
         let digitalEventType = EventBusValue.MICROBIT_PIN_EVT_FALL;
-        if (triggerState == DigitalInputTriggerState.HIGH) {
+        if (triggerState == DigitalInputTriggerState.High) {
             digitalEventType = EventBusValue.MICROBIT_PIN_EVT_RISE;
         }
 
