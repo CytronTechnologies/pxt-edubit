@@ -15,7 +15,7 @@
         "ir_sensor_bit.ts",
         "sound_sensor_bit.ts",
         "color_bit.ts",
-        "digital_output.ts",
+        "output.ts",
         "input.ts"
     ],
     "testFiles": [
