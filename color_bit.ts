@@ -54,6 +54,10 @@ namespace edubit_color {
     //% block="Clear ColorBit || at pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function clear(pin: ColorBitPin = ColorBitPin.P15): void {
+        for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
+            colorsArray[i] = 0;
+        }
+
         colorBit.setPin(<number>pin);
         colorBit.clear();
         basic.pause(0);
@@ -75,7 +79,6 @@ namespace edubit_color {
         colorsArray[3] = NeoPixelColors.Indigo;
 
         colorBit.setPin(<number>pin);
-
         for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
             colorBit.setPixelColor(i, colorsArray[i]);
         }
@@ -125,6 +128,106 @@ namespace edubit_color {
 
 
     /**
+     * Shift the LEDs on Color Bit (-3 to 3).
+     * @param offset Number of LEDs to shift. eg: 1
+     * @param pin Pin number for Color Bit. eg: ColorBitPin.P15
+     */
+    //% blockGap=8
+    //% blockId="edubit_colorbit_shift_pixels"
+    //% block="Shift ColorBit LEDs by %offset || at pin %pin"
+    //% offset.min=-3 offset.max=3
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
+    export function shiftPixels(offset: number, pin: ColorBitPin = ColorBitPin.P15): void {
+        // Do nothing if offset is 0.
+        if (offset == 0) {
+            return;
+        }
+
+        // Shift forward.
+        else if (offset > 0) {
+            while (offset-- > 0) {
+                for (let i = COLOR_BIT_LENGTH - 1; i > 0; i--) {
+                    colorsArray[i] = colorsArray[i - 1];
+                }
+                colorsArray[0] = 0;
+            }
+        }
+
+        // Shift backward.
+        else {
+            offset = -offset;
+            while (offset-- > 0) {
+                for (let i = 0; i < COLOR_BIT_LENGTH - 1; i++) {
+                    colorsArray[i] = colorsArray[i + 1];
+                }
+                colorsArray[COLOR_BIT_LENGTH - 1] = 0;
+            }
+        }
+        
+        
+        colorBit.setPin(<number>pin);
+
+        // Show the new color.
+        for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
+            colorBit.setPixelColor(i, colorsArray[i]);
+        }
+        colorBit.show();
+        basic.pause(0);
+    }
+
+
+    /**
+     * Rotate the LEDs on Color Bit (-3 to 3).
+     * @param offset Number of LEDs to rotate. eg: 1
+     * @param pin Pin number for Color Bit. eg: ColorBitPin.P15
+     */
+    //% blockGap=30
+    //% blockId="edubit_colorbit_rotate_pixels"
+    //% block="Rotate ColorBit LEDs by %offset || at pin %pin"
+    //% offset.min=-3 offset.max=3
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
+    export function rotatePixels(offset: number, pin: ColorBitPin = ColorBitPin.P15): void {
+        // Do nothing if offset is 0.
+        if (offset == 0) {
+            return;
+        }
+
+        // Rotate forward.
+        else if (offset > 0) {
+            while (offset-- > 0) {
+                let lastLed = colorsArray[COLOR_BIT_LENGTH - 1];
+                for (let i = COLOR_BIT_LENGTH - 1; i > 0; i--) {
+                    colorsArray[i] = colorsArray[i - 1];
+                }
+                colorsArray[0] = lastLed;
+            }
+        }
+
+        // Rotate backward.
+        else {
+            offset = -offset;
+            while (offset-- > 0) {
+                let lastLed = colorsArray[0];
+                for (let i = 0; i < COLOR_BIT_LENGTH - 1; i++) {
+                    colorsArray[i] = colorsArray[i + 1];
+                }
+                colorsArray[COLOR_BIT_LENGTH - 1] = lastLed;
+            }
+        }
+
+
+        colorBit.setPin(<number>pin);
+
+        // Show the new color.
+        for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
+            colorBit.setPixelColor(i, colorsArray[i]);
+        }
+        colorBit.show();
+        basic.pause(0);
+    }
+
+
+    /**
      * Set the brightness of the Color Bit (0-255).
      * @param brightness LED brightness. eg: 25, 50, 100
      * @param pin Pin number for Color Bit. eg: ColorBitPin.P15
@@ -138,11 +241,10 @@ namespace edubit_color {
         colorBit.setPin(<number>pin);
         colorBit.setBrightness(brightness);
 
-        // Restore the original color if that pixel is not rainbow color.
+        // Restore the original color.
         for (let i = 0; i < COLOR_BIT_LENGTH; i++) {
             colorBit.setPixelColor(i, colorsArray[i]);
         }
-
         colorBit.show();
         basic.pause(0);
     }
