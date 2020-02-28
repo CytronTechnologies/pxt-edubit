@@ -28,7 +28,7 @@ const RGB_BIT_LENGTH = 4;
 /**
  * Blocks for RGB Bit.
  */
-//% weight=11 color=#ff8000 icon="\uf110" block="RGB Bit"
+//% weight=12 color=#ff8000 icon="\uf110" block="RGB Bit"
 namespace edubit_rgb_bit {
     // Colors array for each pixel.
     let colorsArray: number[] = [];

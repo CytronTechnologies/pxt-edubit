@@ -26,7 +26,7 @@ enum LedPin {
 /**
  * Blocks for Traffic Light Bit.
  */
-//% weight=13 color=#ff8000 icon="\uf0eb" block="Traffic Light Bit"
+//% weight=11 color=#ff8000 icon="\uf0eb" block="Traffic Light Bit"
 namespace edubit_traffic_light_bit {
 
     // State for each pin.
