@@ -14,9 +14,7 @@
         "pot_bit.ts",
         "ir_sensor_bit.ts",
         "sound_sensor_bit.ts",
-        "color_bit.ts",
-        "output.ts",
-        "input.ts"
+        "color_bit.ts"
     ],
     "testFiles": [
         "test.ts"
