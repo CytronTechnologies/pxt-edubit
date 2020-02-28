@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Functions for edu:bit - Potentiometer Bit.
+ * Functions for edu:bit - Potentio Bit.
  *
  * Company: Cytron Technologies Sdn Bhd
  * Website: http://www.cytron.io
  * Email:   support@cytron.io
  *******************************************************************************/
 
-// Possible pins for potentiometer.
+// Possible pins for Potentio Bit.
 enum PotPin {
     //% block="P1 (Default)"
     P1 = AnalogPin.P1,
@@ -26,10 +26,10 @@ enum PotCompareType {
 
 
 /**
- * Blocks for Potentiometer Bit.
+ * Blocks for Potentio Bit.
  */
-//% weight=16 color=#ff8000 icon="\uf01e" block="Potentiometer"
-namespace edubit_pot {
+//% weight=16 color=#ff8000 icon="\uf01e" block="Potentio Bit"
+namespace edubit_potentio_bit {
     // Indicate whether background function has been created.
     let bgFunctionCreated = false;
 
