@@ -13,7 +13,7 @@
         "motors.ts",
         "potentio_bit.ts",
         "ir_bit.ts",
-        "sound_sensor_bit.ts",
+        "sound_bit.ts",
         "rgb_bit.ts"
     ],
     "testFiles": [

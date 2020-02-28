@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Functions for edu:bit - Sound Sensor Bit.
+ * Functions for edu:bit - Sound Bit.
  *
  * Company: Cytron Technologies Sdn Bhd
  * Website: http://www.cytron.io
@@ -40,9 +40,9 @@ enum SoundSensorCompareType {
 
 
 /**
- * Blocks for Sound Sensor Bit.
+ * Blocks for Sound Bit.
  */
-//% weight=15 color=#ff8000 icon="\uf130" block="Sound Sensor"
+//% weight=15 color=#ff8000 icon="\uf130" block="Sound Bit"
 //% groups=['Analog Input', 'Digital Input']
 namespace edubit_sound_sensor {
 
