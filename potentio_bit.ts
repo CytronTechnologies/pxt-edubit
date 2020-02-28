@@ -7,11 +7,11 @@
  *******************************************************************************/
 
 // Possible pins for Potentio Bit.
-enum PotPin {
-    //% block="P1 (Default)"
-    P1 = AnalogPin.P1,
+enum PotentioBitPin {
+    //% block="P2*"
+    P2 = AnalogPin.P2,
     P0 = AnalogPin.P0,
-    P2 = AnalogPin.P2
+    P1 = AnalogPin.P1,
 };
 
 // Comparison type.
@@ -28,7 +28,7 @@ enum PotCompareType {
 /**
  * Blocks for Potentio Bit.
  */
-//% weight=16 color=#ff8000 icon="\uf01e" block="Potentio Bit"
+//% weight=14 color=#ff8000 icon="\uf01e" block="Potentio Bit"
 namespace edubit_potentio_bit {
     // Indicate whether background function has been created.
     let bgFunctionCreated = false;
@@ -39,7 +39,7 @@ namespace edubit_potentio_bit {
     // Array for compare type, threshold and pin number.
     let compareTypesArray: PotCompareType[] = [];
     let thresholdsArray: number[] = [];
-    let pinsArray: PotPin[] = [];
+    let pinsArray: PotentioBitPin[] = [];
 
     // Array for old compare result.
     let oldCompareResult: boolean[] = [];
@@ -48,29 +48,27 @@ namespace edubit_potentio_bit {
 
     /**
      * Return potentiometer value (0-1023).
-     * @param pin Pin number for potentiometer. eg: PotPin.P1
+     * @param pin Pin number for potentiometer.
      */
     //% blockGap=8
     //% blockId=edubit_read_pot_value
-    //% block="Read potentiometer || at pin %pin"
-    //% pin.fieldEditor="gridpicker"
-    export function readPotValue(pin: PotPin = PotPin.P1): number {
+    //% block="potentiometer value %pin"
+    export function readPotValue(pin: PotentioBitPin): number {
         return pins.analogReadPin(<number>pin);
     }
 
 
     /**
     * Compare the potentiometer value (0-1023) with a number and return the result (true/false).
-    * @param compareType More than or less than. eg: PotCompareType.MoreThan
-    * @param threshold The value to compare with. eg: 0, 512, 1023
-    * @param pin Pin number for potentiometer. eg: PotPin.P1
+    * @param pin Pin number for potentiometer.
+    * @param compareType More than or less than.
+    * @param threshold The value to compare with.
     */
     //% blockGap=30
     //% blockId=edubit_compare_potentiometer
-    //% block="Potentiometer value %compareType %threshold || at pin %pin"
-    //% pin.fieldEditor="gridpicker"
+    //% block="potentiometer value %pin %compareType %threshold"
     //% threshold.min=0 threshold.max=1023
-    export function comparePot(compareType: PotCompareType, threshold: number, pin: PotPin = PotPin.P1): boolean {
+    export function comparePot(pin: PotentioBitPin, compareType: PotCompareType, threshold: number, ): boolean {
         let result = false;
         switch (compareType) {
             case PotCompareType.MoreThan:
@@ -91,16 +89,16 @@ namespace edubit_potentio_bit {
 
     /**
     * Compare the potentiometer value with a number and do something when true.
-    * @param compareType More than or less than. eg: PotCompareType.MoreThan
-    * @param threshold The value to compare with. eg: 0, 512, 1023
-    * @param pin Pin number for potentiometer. eg: PotPin.P1
+    * @param pin Pin number for potentiometer.
+    * @param compareType More than or less than.
+    * @param threshold The value to compare with.
+    * @param handler The code to run when true.
     */
     //% blockGap=8
     //% blockId=edubit_potentiometer_event
-    //% block="On potentiometer %compareType %threshold at pin %pin"
-    //% pin.fieldEditor="gridpicker"
+    //% block="on potentiometer value %pin %compareType %threshold"
     //% threshold.min=0 threshold.max=1023
-    export function onEvent(compareType: PotCompareType, threshold: number, pin: PotPin, handler: Action): void {
+    export function onEvent(pin: PotentioBitPin, compareType: PotCompareType, threshold: number, handler: Action): void {
         // Use a new event type everytime a new event is create.
         eventType++;
 
@@ -125,7 +123,7 @@ namespace edubit_potentio_bit {
                     for (let i = 0; i < eventType; i++) {
 
                         // Check if the condition is met.
-                        if (comparePot(compareTypesArray[i], thresholdsArray[i], pinsArray[i]) == true) {
+                        if (comparePot(pinsArray[i], compareTypesArray[i], thresholdsArray[i]) == true) {
                             // Raise the event if the compare result changed from false to true.
                             if (oldCompareResult[i] == false) {
                                 control.raiseEvent(getEventSource(pinsArray[i]), i + 1);
@@ -154,14 +152,14 @@ namespace edubit_potentio_bit {
     /**
     * Get the event source based on pin number.
     */
-    function getEventSource(pin: PotPin): EventBusSource {
+    function getEventSource(pin: PotentioBitPin): EventBusSource {
         // Get the event source based on pin number.
         switch (pin) {
-            case PotPin.P0: return EventBusSource.MICROBIT_ID_IO_P0;
-            case PotPin.P1: return EventBusSource.MICROBIT_ID_IO_P1;
-            case PotPin.P2: return EventBusSource.MICROBIT_ID_IO_P2;
+            case PotentioBitPin.P0: return EventBusSource.MICROBIT_ID_IO_P0;
+            case PotentioBitPin.P1: return EventBusSource.MICROBIT_ID_IO_P1;
+            case PotentioBitPin.P2: return EventBusSource.MICROBIT_ID_IO_P2;
         }
         return null;
     }
-    
+
 }
