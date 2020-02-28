@@ -163,8 +163,8 @@ namespace edubit_color {
                 colorsArray[COLOR_BIT_LENGTH - 1] = 0;
             }
         }
-        
-        
+
+
         colorBit.setPin(<number>pin);
 
         // Show the new color.
