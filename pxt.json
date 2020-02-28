@@ -12,7 +12,7 @@
         "leds_bit.ts",
         "motors.ts",
         "pot_bit.ts",
-        "ir_sensor_bit.ts",
+        "ir_bit.ts",
         "sound_sensor_bit.ts",
         "rgb_bit.ts"
     ],
