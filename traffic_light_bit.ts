@@ -6,19 +6,20 @@
  * Email:   support@cytron.io
  *******************************************************************************/
 
-// Possible pins for LED.
+// Possible pins for traffic light LED.
 enum LedPin {
-    //% block="P13 (Green Default)"
-    P13 = DigitalPin.P13,
-    //% block="P14 (Red Default)"
+    //% block="P14* (Red)"
     P14 = DigitalPin.P14,
+    //% block="P15* (Yellow)"
+    P15 = DigitalPin.P15,
+    //% block="P16* (Green)"
+    P16 = DigitalPin.P16,
     P0 = DigitalPin.P0,
     P1 = DigitalPin.P1,
     P2 = DigitalPin.P2,
     P8 = DigitalPin.P8,
     P12 = DigitalPin.P12,
-    P15 = DigitalPin.P15,
-    P16 = DigitalPin.P16,
+    P13 = DigitalPin.P13,
 };
 
 
@@ -46,13 +47,12 @@ namespace edubit_traffic_light_bit {
 
     /**
      * Turn on/off the LED.
-     * @param pin LED pin. eg: LedPin.P13
-     * @param state LED state. eg: 0, 1
+     * @param pin LED pin.
+     * @param state LED state.
      */
     //% blockGap=8
     //% blockId=edubit_set_led
     //% block="Set LED %pin to %state"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     //% state.min=0 state.max=1
     export function setLed(pin: LedPin, state: number): void {
         // Save the pin state.
@@ -76,12 +76,11 @@ namespace edubit_traffic_light_bit {
 
     /**
      * Toggle the LED.
-     * @param pin LED pin. eg: LedPin.P13
+     * @param pin LED pin.
      */
     //% blockGap=8
     //% blockId=edubit_toggle_led
     //% block="Toggle LED %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function toggleLed(pin: LedPin): void {
         // Read the pin state.
         let state = 0;

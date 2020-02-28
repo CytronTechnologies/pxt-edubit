@@ -8,7 +8,7 @@
 
 // Possible pins for IR Bit.
 enum IrBitPin {
-    //% block="P8 (Default)"
+    //% block="P8*"
     P8 = DigitalPin.P8,
     P0 = DigitalPin.P0,
     P1 = DigitalPin.P1,
@@ -22,11 +22,11 @@ enum IrBitPin {
 
 // IR sensor Event Type.
 enum IrEventType {
-    //% block="Not Triggered"
-    Fall = EventBusValue.MICROBIT_PIN_EVT_FALL,
-
     //% block="Triggered"
     Rise = EventBusValue.MICROBIT_PIN_EVT_RISE,
+
+    //% block="Not Triggered"
+    Fall = EventBusValue.MICROBIT_PIN_EVT_FALL,
 }
 
 
@@ -39,26 +39,24 @@ namespace edubit_ir_bit {
 
     /**
      * Return IR sensor state (0 or 1).
-     * @param pin Pin number for IR Bit. eg: IrBitPin.P8
+     * @param pin Pin number for IR Bit.
      */
     //% blockGap=8
     //% blockId=edubit_read_ir_sensor
-    //% block="Read IR sensor || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function readIrSensor(pin: IrBitPin = IrBitPin.P8): number {
+    //% block="IR sensor state %pin"
+    export function readIrSensor(pin: IrBitPin): number {
         return pins.digitalReadPin(<number>pin);
     }
 
 
     /**
      * Return true if IR sensor is triggered.
-     * @param pin Pin number for IR Bit. eg: IrBitPin.P8
+     * @param pin Pin number for IR Bit.
      */
     //% blockGap=30
     //% blockId=edubit_is_ir_sensor_triggered
-    //% block="IR sensor's triggered || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function isIrSensorTriggered(pin: IrBitPin = IrBitPin.P8): boolean {
+    //% block="IR sensor %pin triggered"
+    export function isIrSensorTriggered(pin: IrBitPin): boolean {
         if (pins.digitalReadPin(<number>pin) != 0) {
             return true;
         }
@@ -70,14 +68,13 @@ namespace edubit_ir_bit {
 
     /**
     * Do something when IR sensor is triggered / not triggered.
-    * @param event Event type. eg: IrEventType.Rise
-    * @param pin Pin number for IR Bit. eg: IrBitPin.P8
+    * @param pin Pin number for IR Bit.
+    * @param event Event type.
     */
     //% blockGap=8
     //% blockId=edubit_ir_sensor_event
-    //% block="On IR sensor's %event at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function onIrSensorEvent(event: IrEventType, pin: IrBitPin, handler: Action) {
+    //% block="on IR sensor %pin %event"
+    export function onIrSensorEvent(pin: IrBitPin, event: IrEventType, handler: Action) {
         // Set the event type as edge triggered.
         pins.setEvents(<number>pin, PinEventType.Edge);
 

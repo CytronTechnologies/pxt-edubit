@@ -8,15 +8,15 @@
 
 // Possible pins for RGB Bit.
 enum RgbBitPin {
-    //% block="P15 (Default)"
-    P15 = DigitalPin.P15,
+    //% block="P13*"
+    P13 = DigitalPin.P13,
     P0 = DigitalPin.P0,
     P1 = DigitalPin.P1,
     P2 = DigitalPin.P2,
     P8 = DigitalPin.P8,
     P12 = DigitalPin.P12,
-    P13 = DigitalPin.P13,
     P14 = DigitalPin.P14,
+    P15 = DigitalPin.P15,
     P16 = DigitalPin.P16,
 };
 
@@ -46,14 +46,13 @@ namespace edubit_rgb_bit {
 
 
     /**
-     * Turn off all LEDs. 
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * Turn off all pixels. 
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=30
     //% blockId="edubit_rgbbit_clear"
-    //% block="Clear RGB Bit || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function clear(pin: RgbBitPin = RgbBitPin.P15): void {
+    //% block="clear all pixels on %pin"
+    export function clear(pin: RgbBitPin): void {
         for (let i = 0; i < RGB_BIT_LENGTH; i++) {
             colorsArray[i] = 0;
         }
@@ -65,14 +64,13 @@ namespace edubit_rgb_bit {
 
 
     /**
-     * Show a rainbow pattern on all LEDs.
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * Show a rainbow pattern on all pixels.
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=8
     //% blockId="edubit_rgbbit_show_rainbow"
-    //% block="Show rainbow on RGB Bit || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function showRainbow(pin: RgbBitPin = RgbBitPin.P15): void {
+    //% block="show rainbow colors on %pin"
+    export function showRainbow(pin: RgbBitPin): void {
         colorsArray[0] = NeoPixelColors.Red;
         colorsArray[1] = NeoPixelColors.Yellow;
         colorsArray[2] = NeoPixelColors.Green;
@@ -90,14 +88,13 @@ namespace edubit_rgb_bit {
 
     /**
      * Show the same color on all pixels. 
-     * @param color RGB color of the pixel. eg: NeoPixelColors.Red
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * @param color RGB color of the pixel.
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=8
     //% blockId="edubit_rgbbit_show_color"
-    //% block="Set all RGB Bit pixels to %color || at pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function showColor(color: NeoPixelColors, pin: RgbBitPin = RgbBitPin.P15): void {
+    //% block="set all pixels on %pin to %color"
+    export function showColor(pin: RgbBitPin, color: NeoPixelColors): void {
         rgbBit.setPin(<number>pin);
         for (let i = 0; i < RGB_BIT_LENGTH; i++) {
             colorsArray[i] = <number>color;
@@ -109,16 +106,15 @@ namespace edubit_rgb_bit {
 
     /**
      * Show color on individual pixel.
-     * @param pixel The pixel number we want to change the color. eg: 0, 1
-     * @param color RGB color of the pixel. eg: NeoPixelColors.Red
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * @param pixel The pixel number we want to change the color.
+     * @param color RGB color of the pixel.
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=30
     //% blockId="edubit_rgbbit_set_pixel_color"
-    //% block="Set RGB Bit pixel %pixel to %color || at pin %pin"
+    //% block="set pixel %pixel on %pin to %color"
     //% pixel.min=0 pixel.max=3
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function setPixelColor(pixel: number, color: NeoPixelColors, pin: RgbBitPin = RgbBitPin.P15): void {
+    export function setPixelColor(pixel: number, pin: RgbBitPin, color: NeoPixelColors): void {
         rgbBit.setPin(<number>pin);
         colorsArray[pixel] = <number>color;
         rgbBit.setPixelColor(pixel, <number>color);
@@ -129,15 +125,14 @@ namespace edubit_rgb_bit {
 
     /**
      * Shift the pixels on RGB Bit (-3 to 3).
-     * @param offset Number of pixels to shift. eg: 1
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * @param offset Number of pixels to shift.
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=8
     //% blockId="edubit_rgbbit_shift_pixels"
-    //% block="Shift RGB Bit pixels by %offset || at pin %pin"
+    //% block="shift pixels on %pin by %offset"
     //% offset.min=-3 offset.max=3
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function shiftPixels(offset: number, pin: RgbBitPin = RgbBitPin.P15): void {
+    export function shiftPixels(pin: RgbBitPin, offset: number): void {
         // Do nothing if offset is 0.
         if (offset == 0) {
             return;
@@ -178,15 +173,14 @@ namespace edubit_rgb_bit {
 
     /**
      * Rotate the pixels on RGB Bit (-3 to 3).
-     * @param offset Number of pixels to rotate. eg: 1
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * @param offset Number of pixels to rotate.
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=30
     //% blockId="edubit_rgbbit_rotate_pixels"
-    //% block="Rotate RGB Bit pixels by %offset || at pin %pin"
+    //% block="rotate pixels on %pin by %offset"
     //% offset.min=-3 offset.max=3
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function rotatePixels(offset: number, pin: RgbBitPin = RgbBitPin.P15): void {
+    export function rotatePixels(pin: RgbBitPin, offset: number): void {
         // Do nothing if offset is 0.
         if (offset == 0) {
             return;
@@ -229,15 +223,14 @@ namespace edubit_rgb_bit {
 
     /**
      * Set the brightness of the RGB Bit (0-255).
-     * @param brightness pixel brightness. eg: 25, 50, 100
-     * @param pin Pin number for RGB Bit. eg: RgbBitPin.P15
+     * @param brightness pixel brightness. eg: 25
+     * @param pin Pin number for RGB Bit.
      */
     //% blockGap=8
     //% blockId="edubit_rgbbit_set_brightness"
-    //% block="Set RGB Bit brightness to %brightness || at pin %pin"
+    //% block="set brightness on %pin to %brightness"
     //% brightness.min=0 brightness.max=255
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
-    export function setBrightness(brightness: number, pin: RgbBitPin = RgbBitPin.P15): void {
+    export function setBrightness(pin: RgbBitPin, brightness: number): void {
         rgbBit.setPin(<number>pin);
         rgbBit.setBrightness(brightness);
 
