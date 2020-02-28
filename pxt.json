@@ -9,7 +9,7 @@
     "files": [
         "README.md",
         "main.ts",
-        "leds_bit.ts",
+        "traffic_light_bit.ts",
         "motors.ts",
         "pot_bit.ts",
         "ir_bit.ts",

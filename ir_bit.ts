@@ -42,7 +42,7 @@ namespace edubit_ir_bit {
      * @param pin Pin number for IR Bit. eg: IrBitPin.P8
      */
     //% blockGap=8
-    //% blockId=edubit_irbit_read_ir_sensor
+    //% blockId=edubit_read_ir_sensor
     //% block="Read IR sensor || at pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function readIrSensor(pin: IrBitPin = IrBitPin.P8): number {
@@ -55,7 +55,7 @@ namespace edubit_ir_bit {
      * @param pin Pin number for IR Bit. eg: IrBitPin.P8
      */
     //% blockGap=30
-    //% blockId=edubit_irbit_is_ir_sensor_triggered
+    //% blockId=edubit_is_ir_sensor_triggered
     //% block="IR sensor's triggered || at pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function isIrSensorTriggered(pin: IrBitPin = IrBitPin.P8): boolean {
@@ -74,7 +74,7 @@ namespace edubit_ir_bit {
     * @param pin Pin number for IR Bit. eg: IrBitPin.P8
     */
     //% blockGap=8
-    //% blockId=edubit_irbit_ir_sensor_event
+    //% blockId=edubit_ir_sensor_event
     //% block="On IR sensor's %event at pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=3
     export function onIrSensorEvent(event: IrEventType, pin: IrBitPin, handler: Action) {

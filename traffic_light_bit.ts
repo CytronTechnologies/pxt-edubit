@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Functions for edu:bit - LEDs Bit.
+ * Functions for edu:bit - Traffic Light Bit.
  *
  * Company: Cytron Technologies Sdn Bhd
  * Website: http://www.cytron.io
@@ -24,10 +24,10 @@ enum LedPin {
 
 
 /**
- * Blocks for LEDs Bit.
+ * Blocks for Traffic Light Bit.
  */
-//% weight=13 color=#ff8000 icon="\uf0eb" block="Red & Green LEDs"
-namespace edubit_leds {
+//% weight=13 color=#ff8000 icon="\uf0eb" block="Traffic Light Bit"
+namespace edubit_traffic_light_bit {
 
     // State for each pin.
     let pinsState = {
