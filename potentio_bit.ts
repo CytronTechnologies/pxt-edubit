@@ -27,7 +27,7 @@ enum PotCompareType {
  * Blocks for Potentio Bit.
  */
 //% weight=14 color=#ff8000 icon="\uf01e" block="Potentio Bit"
-namespace edubit_potentio_bit {
+namespace edubitPotentioBit {
     // Indicate whether background function has been created.
     let bgFunctionCreated = false;
 

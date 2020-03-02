@@ -27,7 +27,7 @@ enum IrEventType {
  * Blocks for IR Bit.
  */
 //% weight=13 color=#ff8000 icon="\uf05b" block="IR Bit"
-namespace edubit_ir_bit {
+namespace edubitIrBit {
 
     /**
      * Return IR sensor state (0 or 1).

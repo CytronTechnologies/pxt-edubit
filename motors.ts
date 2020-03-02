@@ -45,7 +45,7 @@ enum Servo {
  */
 //% weight=10 color=#ff8000 icon="\uf085" block="Motors & Servos"
 //% groups=['DC Motors', 'Servos']
-namespace edubit_motors {
+namespace edubitMotors {
 
     /**
      * Brake the motor

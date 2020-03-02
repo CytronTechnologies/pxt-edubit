@@ -27,7 +27,7 @@ enum SoundSensorCompareType {
  * Blocks for Sound Bit.
  */
 //% weight=15 color=#ff8000 icon="\uf130" block="Sound Bit"
-namespace edubit_sound_sensor {
+namespace edubitSoundBit {
     // Indicate whether background function has been created.
     let bgFunctionCreated = false;
 
