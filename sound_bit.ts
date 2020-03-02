@@ -6,13 +6,11 @@
  * Email:   support@cytron.io
  *******************************************************************************/
 
-// Possible pins for Sound Bit.
-enum SoundBitPin {
-    //% block="P1*"
-    P1 = AnalogPin.P1,
-    P0 = AnalogPin.P0,
-    P2 = AnalogPin.P2,
-}
+// Default pin.
+const SOUND_BIT_PIN = AnalogPin.P1;
+
+// Event source.
+const SOUND_BIT_EVENT_SOURCE = EventBusSource.MICROBIT_ID_IO_P1;
 
 // Comparison type.
 enum SoundSensorCompareType {
@@ -36,10 +34,9 @@ namespace edubit_sound_sensor {
     // Event type.
     let eventType = 0;
 
-    // Array for compare type, threshold and pin number.
+    // Array for compare type and threshold.
     let compareTypesArray: SoundSensorCompareType[] = [];
     let thresholdsArray: number[] = [];
-    let pinsArray: SoundBitPin[] = [];
 
     // Array for old compare result.
     let oldCompareResult: boolean[] = [];
@@ -52,33 +49,32 @@ namespace edubit_sound_sensor {
      */
     //% blockGap=8
     //% blockId=edubit_read_sound_sensor
-    //% block="sound level %pin"
-    export function readSoundSensor(pin: SoundBitPin = SoundBitPin.P1): number {
-        return pins.analogReadPin(<number>pin);
+    //% block="sound level"
+    export function readSoundSensor(): number {
+        return pins.analogReadPin(SOUND_BIT_PIN);
     }
 
 
     /**
     * Compare the sound level (0-1023) with a number and return the result (true/false).
-    * @param pin Pin number for sound sensor.
     * @param compareType More than or less than.
     * @param threshold The value to compare with.
     */
-    //% blockGap=30
+    //% blockGap=40
     //% blockId=edubit_compare_sound_sensor
-    //% block="sound level %pin %compareType %threshold"
+    //% block="sound level %compareType %threshold"
     //% threshold.min=0 threshold.max=1023
-    export function compareSoundSensor(pin: SoundBitPin = SoundBitPin.P1, compareType: SoundSensorCompareType, threshold: number): boolean {
+    export function compareSoundSensor(compareType: SoundSensorCompareType, threshold: number): boolean {
         let result = false;
         switch (compareType) {
             case SoundSensorCompareType.MoreThan:
-                if (readSoundSensor(pin) > threshold) {
+                if (readSoundSensor() > threshold) {
                     result = true;
                 }
                 break;
 
             case SoundSensorCompareType.LessThan:
-                if (readSoundSensor(pin) < threshold) {
+                if (readSoundSensor() < threshold) {
                     result = true;
                 }
                 break;
@@ -90,29 +86,27 @@ namespace edubit_sound_sensor {
 
     /**
     * Compare the sound level value with a number and do something when true.
-    * @param pin Pin number for sound sensor.
     * @param compareType More than or less than.
     * @param threshold The value to compare with.
-    * @param handler The code to run when true.
+    * @param handler Code to run when the event is raised.
     */
     //% blockGap=8
     //% blockId=edubit_sound_sensor_event
-    //% block="on sound level %pin %compareType %threshold"
+    //% block="on sound level %compareType %threshold"
     //% threshold.min=0 threshold.max=1023
-    export function onEvent(pin: SoundBitPin, compareType: SoundSensorCompareType, threshold: number, handler: Action): void {
+    export function onEventAdvanced(compareType: SoundSensorCompareType, threshold: number, handler: Action): void {
         // Use a new event type everytime a new event is create.
         eventType++;
 
         // Add the event info to the arrays.
         compareTypesArray.push(compareType);
         thresholdsArray.push(threshold);
-        pinsArray.push(pin);
 
         // Create a placeholder for the old compare result.
         oldCompareResult.push(false);
 
         // Register the event.
-        control.onEvent(getEventSource(pin), eventType, handler);
+        control.onEvent(SOUND_BIT_EVENT_SOURCE, eventType, handler);
 
         // Create a function in background if haven't done so.
         // This function will check for pot value and raise the event if the condition is met.
@@ -124,10 +118,10 @@ namespace edubit_sound_sensor {
                     for (let i = 0; i < eventType; i++) {
 
                         // Check if the condition is met.
-                        if (compareSoundSensor(pinsArray[i], compareTypesArray[i], thresholdsArray[i]) == true) {
+                        if (compareSoundSensor(compareTypesArray[i], thresholdsArray[i]) == true) {
                             // Raise the event if the compare result changed from false to true.
                             if (oldCompareResult[i] == false) {
-                                control.raiseEvent(getEventSource(pinsArray[i]), i + 1);
+                                control.raiseEvent(SOUND_BIT_EVENT_SOURCE, i + 1);
                             }
 
                             // Save old compare result.
@@ -147,21 +141,7 @@ namespace edubit_sound_sensor {
         }
 
     }
-
-
-
-    /**
-    * Get the event source based on pin number.
-    */
-    function getEventSource(pin: SoundBitPin): EventBusSource {
-        // Get the event source based on pin number.
-        switch (pin) {
-            case SoundBitPin.P0: return EventBusSource.MICROBIT_ID_IO_P0;
-            case SoundBitPin.P1: return EventBusSource.MICROBIT_ID_IO_P1;
-            case SoundBitPin.P2: return EventBusSource.MICROBIT_ID_IO_P2;
-        }
-        return null;
-    }
+    
 
 }
 

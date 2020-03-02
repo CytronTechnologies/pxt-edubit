@@ -77,7 +77,7 @@ namespace edubit_motors {
      * @param speed Motor speed (0-255). eg: 0, 100, 255
      */
     //% group="DC Motors"
-    //% blockGap=8
+    //% blockGap=40
     //% blockId=edubit_run_motor
     //% block="Run motor %motor %direction at speed %speed"
     //% speed.min=0 speed.max=255
@@ -114,7 +114,7 @@ namespace edubit_motors {
      * @param servo Servo channel. eg: Servo.S1, Servo.S2
      */
     //% group="Servos"
-    //% blockGap=30
+    //% blockGap=40
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
     export function disableServo(servo: Servo): void {
