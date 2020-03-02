@@ -94,7 +94,7 @@ namespace edubitSoundBit {
     //% blockId=edubit_sound_sensor_event
     //% block="on sound level %compareType %threshold"
     //% threshold.min=0 threshold.max=1023
-    export function onEventAdvanced(compareType: SoundSensorCompareType, threshold: number, handler: Action): void {
+    export function onEvent(compareType: SoundSensorCompareType, threshold: number, handler: Action): void {
         // Use a new event type everytime a new event is create.
         eventType++;
 
