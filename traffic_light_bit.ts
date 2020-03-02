@@ -8,9 +8,14 @@
 
 // Color for traffic light LED.
 enum LedColor {
-    red = DigitalPin.P14,
-    yellow = DigitalPin.P15,
-    green = DigitalPin.P16,
+    //% block="red"
+    Red = DigitalPin.P14,
+
+    //% block="yellow"
+    Yellow = DigitalPin.P15,
+
+    //% block="green"
+    Green = DigitalPin.P16,
 };
 
 
@@ -42,9 +47,9 @@ namespace edubitTrafficLightBit {
     export function setLed(color: LedColor, state: number): void {
         // Save the pin state.
         switch (color) {
-            case LedColor.red:    ledState.red = state;    break;
-            case LedColor.yellow: ledState.yellow = state; break;
-            case LedColor.green:  ledState.green = state;  break;
+            case LedColor.Red:    ledState.red = state;    break;
+            case LedColor.Yellow: ledState.yellow = state; break;
+            case LedColor.Green:  ledState.green = state;  break;
         }
 
         // Write to pin.
@@ -64,9 +69,9 @@ namespace edubitTrafficLightBit {
         // Read the pin state.
         let state = 0;
         switch (color) {
-            case LedColor.red:    state = ledState.red;    break;
-            case LedColor.yellow: state = ledState.yellow; break;
-            case LedColor.green:  state = ledState.green;  break;
+            case LedColor.Red:    state = ledState.red;    break;
+            case LedColor.Yellow: state = ledState.yellow; break;
+            case LedColor.Green:  state = ledState.green;  break;
         }
 
         // Toggle the state and write to pin.
