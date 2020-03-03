@@ -20,19 +20,19 @@ const REG_ADD_M2B = 7;
 
 
 // Motor channel.
-enum Motor {
+enum MotorChannel {
     M1 = 0,
     M2 = 1
 };
 
 // Motor direction.
-enum Direction {
+enum MotorDirection {
     Forward = 0,
     Backward = 1
 };
 
 // Servo Channel.
-enum Servo {
+enum ServoChannel {
     S1 = REG_ADD_SERVO_1,
     S2 = REG_ADD_SERVO_2,
     S3 = REG_ADD_SERVO_3
@@ -55,14 +55,14 @@ namespace edubitMotors {
     //% blockGap=8
     //% blockId=edubit_brake_motor
     //% block="Brake motor %motor"
-    export function brakeMotor(motor: Motor): void {
+    export function brakeMotor(motor: MotorChannel): void {
         switch (motor) {
-            case Motor.M1:
+            case MotorChannel.M1:
                 i2cWrite(REG_ADD_M1A, 0);
                 i2cWrite(REG_ADD_M1B, 0);
                 break;
 
-            case Motor.M2:
+            case MotorChannel.M2:
                 i2cWrite(REG_ADD_M2A, 0);
                 i2cWrite(REG_ADD_M2B, 0);
                 break;
@@ -72,20 +72,20 @@ namespace edubitMotors {
 
     /**
      * Run the motor forward or backward (Speed = 0-255).
-     * @param motor Motor channel. eg: Motor.M1, Motor.M2
-     * @param direction Motor direction. eg: Direction.Forward, Direction.Backward
-     * @param speed Motor speed (0-255). eg: 0, 100, 255
+     * @param motor Motor channel.
+     * @param direction Motor direction.
+     * @param speed Motor speed (0-255).
      */
     //% group="DC Motors"
     //% blockGap=40
     //% blockId=edubit_run_motor
     //% block="Run motor %motor %direction at speed %speed"
     //% speed.min=0 speed.max=255
-    export function runMotor(motor: Motor, direction: Direction, speed: number): void {
+    export function runMotor(motor: MotorChannel, direction: MotorDirection, speed: number): void {
         speed = edubit.limit(speed, 0, 255);
         switch (motor) {
-            case Motor.M1:
-                if (direction == Direction.Forward) {
+            case MotorChannel.M1:
+                if (direction == MotorDirection.Forward) {
                     i2cWrite(REG_ADD_M1A, speed);
                     i2cWrite(REG_ADD_M1B, 0);
                 }
@@ -95,8 +95,8 @@ namespace edubitMotors {
                 }
                 break;
 
-            case Motor.M2:
-                if (direction == Direction.Forward) {
+            case MotorChannel.M2:
+                if (direction == MotorDirection.Forward) {
                     i2cWrite(REG_ADD_M2A, speed);
                     i2cWrite(REG_ADD_M2B, 0);
                 }
@@ -111,28 +111,28 @@ namespace edubitMotors {
 
     /**
      * Disable the servo.
-     * @param servo Servo channel. eg: Servo.S1, Servo.S2
+     * @param servo Servo channel.
      */
     //% group="Servos"
     //% blockGap=40
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
-    export function disableServo(servo: Servo): void {
+    export function disableServo(servo: ServoChannel): void {
         i2cWrite(servo, 0);
     }
 
 
     /**
      * Set the position for servo (0-180 degrees).
-     * @param servo Servo channel. eg: Servo.S1, Servo.S2
-     * @param position Servo positon. eg: 90, 180
+     * @param servo Servo channel.
+     * @param position Servo positon. eg: 90
      */
     //% group="Servos"
     //% blockGap=8
     //% blockId=edubit_set_servo_position
     //% block="Set servo %servo position to %position degrees"
     //% position.min=0 position.max=180
-    export function setServoPosition(servo: Servo, position: number): void {
+    export function setServoPosition(servo: ServoChannel, position: number): void {
         position = edubit.limit(position, 0, 180);
 
         let pulseWidth = position * 20 / 18 + 50
@@ -142,15 +142,15 @@ namespace edubitMotors {
 
     /**
      * Set the pulse width for servo (450-2550 microseconds).
-     * @param servo Servo channel. eg: Servo.S1, Servo.S2
-     * @param pulseWidth Pulse width in microseconds. eg: 1500, 2000
+     * @param servo Servo channel.
+     * @param pulseWidth Pulse width in microseconds. eg: 1500
      */
     //% group="Servos"
     //% blockGap=8
     //% blockId=edubit_set_servo_pulse_width
     //% block="Set servo %servo pulse width to %pulseWidth us"
     //% pulseWidth.min=450 pulseWidth.max=2550
-    export function setServoPulseWidth(servo: Servo, pulseWidth: number): void {
+    export function setServoPulseWidth(servo: ServoChannel, pulseWidth: number): void {
         pulseWidth = edubit.limit(pulseWidth, 450, 2550);
         i2cWrite(servo, pulseWidth / 10);
     }

@@ -3,13 +3,13 @@
  */
 namespace edubit {
     // Brake the motors.
-    edubitMotors.brakeMotor(Motor.M1);
-    edubitMotors.brakeMotor(Motor.M2);
+    edubitMotors.brakeMotor(MotorChannel.M1);
+    edubitMotors.brakeMotor(MotorChannel.M2);
 
     // Disable the servos.
-    edubitMotors.disableServo(Servo.S1);
-    edubitMotors.disableServo(Servo.S2);
-    edubitMotors.disableServo(Servo.S3);
+    edubitMotors.disableServo(ServoChannel.S1);
+    edubitMotors.disableServo(ServoChannel.S2);
+    edubitMotors.disableServo(ServoChannel.S3);
 
 
 
