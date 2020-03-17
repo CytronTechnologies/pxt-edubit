@@ -98,11 +98,12 @@ namespace edubitRgbBit {
     //% blockGap=8
     //% blockId="edubit_show_color"
     //% block="set all RGB pixels to %color"
-    export function showColor(color: NeoPixelColors): void {
+    //% color.shadow="colorNumberPicker"
+    export function showColor(color: number): void {
         for (let i = 0; i < RGB_BIT_LENGTH; i++) {
-            colorsArray[i] = <number>color;
+            colorsArray[i] = color;
         }
-        rgbBit.showColor(<number>color);
+        rgbBit.showColor(color);
         basic.pause(0);
     }
 
@@ -115,10 +116,11 @@ namespace edubitRgbBit {
     //% blockGap=40
     //% blockId="edubit_set_pixel_color"
     //% block="set RGB pixel %pixel to %color"
+    //% color.shadow="colorNumberPicker"
     //% pixel.min=0 pixel.max=3
-    export function setPixelColor(pixel: number, color: NeoPixelColors): void {
-        colorsArray[pixel] = <number>color;
-        rgbBit.setPixelColor(pixel, <number>color);
+    export function setPixelColor(pixel: number, color: number): void {
+        colorsArray[pixel] = color;
+        rgbBit.setPixelColor(pixel, color);
         rgbBit.show();
         basic.pause(0);
     }
