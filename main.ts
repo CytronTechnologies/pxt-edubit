@@ -1,6 +1,25 @@
 /**
  * Board initialization and helper function.
  */
+
+// I2C slave address for PIC16F1937.
+const I2C_ADDRESS = 0x08;
+
+// Register address.
+const REG_ADD_REVISION = 0;
+const REG_ADD_SERVO_1 = 1;
+const REG_ADD_SERVO_2 = 2;
+const REG_ADD_SERVO_3 = 3;
+const REG_ADD_M1A = 4;
+const REG_ADD_M1B = 5;
+const REG_ADD_M2A = 6;
+const REG_ADD_M2B = 7;
+const REG_ADD_LB_UTH = 8;
+const REG_ADD_LB_LTH = 9;
+const REG_ADD_OV_TH = 10;
+
+
+
 namespace edubit {
     // Brake the motors.
     edubitMotors.brakeMotor(MotorChannel.M1);
@@ -30,4 +49,21 @@ namespace edubit {
         }
         return value;
     }
+
+
+
+    /**
+     * I2C write to the register on PIC16F1937.
+     * @param register Register address.
+     * @param data Data to write.
+     */
+    //% blockHidden=true
+    //% blockId=edubit_i2c_write
+    export function i2cWrite(register: number, data: number): void {
+        let buffer = pins.createBuffer(2);
+        buffer[0] = register;
+        buffer[1] = data;
+        pins.i2cWriteBuffer(I2C_ADDRESS, buffer);
+    }
+
 }
