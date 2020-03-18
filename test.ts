@@ -54,14 +54,14 @@ basic.forever(function () {
 
 
     // Show red color on all RGB pixels.
-    edubitRgbBit.showColor(NeoPixelColors.Red)
+    edubitRgbBit.showColor(0xff0000)
     basic.pause(1000)
 
-    // Show differenc color on each RGB pixels.
-    edubitRgbBit.setPixelColor(0, NeoPixelColors.Red)
-    edubitRgbBit.setPixelColor(1, NeoPixelColors.Green)
-    edubitRgbBit.setPixelColor(2, NeoPixelColors.Blue)
-    edubitRgbBit.setPixelColor(3, NeoPixelColors.Yellow)
+    // Show different color on each RGB pixels.
+    edubitRgbBit.setPixelColor(0, 0xff0000)
+    edubitRgbBit.setPixelColor(1, 0x00ff00)
+    edubitRgbBit.setPixelColor(2, 0x0000ff)
+    edubitRgbBit.setPixelColor(3, 0xffff00)
     basic.pause(1000)
 
     // Change the brightness to 100% and show rainbow color.
