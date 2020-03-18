@@ -1,6 +1,6 @@
 {
     "name": "pxt-edubit",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -19,7 +19,7 @@
     "testFiles": [
         "test.ts"
     ],
-    "public": false,
+    "public": true,
     "preferredEditor": "tsprj",
     "installedVersion": "workspace:8689d576-e086-4541-3e3a-80a86a4cf5ce"
 }
