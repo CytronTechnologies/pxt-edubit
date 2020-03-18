@@ -130,15 +130,15 @@ edubitRgbBit.setBrightness(255)
 Show color green on all RGB pixels and change the color one by one to red.
 
 ```blocks
-edubitRgbBit.showColor(NeoPixelColors.Green)
+edubitRgbBit.showColor(0x00ff00)
 basic.pause(1000)
-edubitRgbBit.setPixelColor(0, NeoPixelColors.Red)
+edubitRgbBit.setPixelColor(0, 0xff0000)
 basic.pause(500)
-edubitRgbBit.setPixelColor(1, NeoPixelColors.Red)
+edubitRgbBit.setPixelColor(1, 0xff0000)
 basic.pause(500)
-edubitRgbBit.setPixelColor(2, NeoPixelColors.Red)
+edubitRgbBit.setPixelColor(2, 0xff0000)
 basic.pause(500)
-edubitRgbBit.setPixelColor(3, NeoPixelColors.Red)
+edubitRgbBit.setPixelColor(3, 0xff0000)
 ```
 
 Show rainbow color and shift it out one by one.
