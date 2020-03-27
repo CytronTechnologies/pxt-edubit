@@ -46,6 +46,7 @@ namespace edubitRgbBit {
         }
 
         rgbBit.clear();
+        rgbBit.show();
         basic.pause(0);
     }
 
@@ -175,7 +176,7 @@ namespace edubitRgbBit {
      * Rotate the color of RGB pixels(-3 to 3).
      * @param offset Number of pixels to rotate.
      */
-    //% blockGap=30
+    //% blockGap=50
     //% blockId="edubit_rotate_pixels"
     //% block="rotate RGB pixels color by %offset"
     //% offset.min=-3 offset.max=3
@@ -215,6 +216,39 @@ namespace edubitRgbBit {
         }
         rgbBit.show();
         basic.pause(0);
+    }
+
+
+    /**
+     * Return the RGB value of a known color.
+    */
+    //% blockGap=8
+    //% blockId="edubit_colors"
+    //% block="%color"
+    export function colors(color: NeoPixelColors): number {
+        return <number>color;
+    }
+
+
+    /**
+     * Converts red, green, blue channels into a RGB color.
+     * @param red Value of the red channel (0 - 255).
+     * @param green Value of the green channel (0 - 255).
+     * @param blue Value of the blue channel (0 - 255).
+     */
+    //% blockGap=30
+    //% blockId="edubit_rgb_value"
+    //% block="red %red green %green blue %blue"
+    //% red.min=0 red.max=255
+    //% green.min=0 green.max=255
+    //% blue.min=0 blue.max=255
+    export function rgb(red: number, green: number, blue: number): number {
+        // Limit the value.
+        red = edubit.limit(red, 0, 255);
+        green = edubit.limit(green, 0, 255);
+        blue = edubit.limit(blue, 0, 255);
+
+        return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
     }
 
 }

@@ -16,6 +16,9 @@ enum LedColor {
 
     //% block="green"
     Green = DigitalPin.P16,
+
+    //% block="all"
+    All = 1000,
 };
 
 
@@ -46,7 +49,7 @@ namespace edubitTrafficLightBit {
 
 
     /**
-     * Turn on/off the LED.
+     * Turn on/off the LED (On = 1, Off = 0).
      * @param color LED color.
      * @param state LED state.
      */
@@ -63,10 +66,18 @@ namespace edubitTrafficLightBit {
             case LedColor.Red: ledState.red = state; break;
             case LedColor.Yellow: ledState.yellow = state; break;
             case LedColor.Green: ledState.green = state; break;
+
+            case LedColor.All:
+                ledState.red = state;
+                ledState.yellow = state;
+                ledState.green = state;
+                break;
         }
 
         // Write to pin.
-        pins.digitalWritePin(<number>color, state);
+        pins.digitalWritePin(<number>LedColor.Red, ledState.red);
+        pins.digitalWritePin(<number>LedColor.Yellow, ledState.yellow);
+        pins.digitalWritePin(<number>LedColor.Green, ledState.green);
     }
 
 
@@ -79,17 +90,24 @@ namespace edubitTrafficLightBit {
     //% blockId=edubit_toggle_led
     //% block="Toggle LED %color"
     export function toggleLed(color: LedColor): void {
-        // Read the pin state.
+        // Toggle the state.
         let state = 0;
         switch (color) {
-            case LedColor.Red: state = ledState.red; break;
-            case LedColor.Yellow: state = ledState.yellow; break;
-            case LedColor.Green: state = ledState.green; break;
+            case LedColor.Red: ledState.red ^= 1; break;
+            case LedColor.Yellow: ledState.yellow ^= 1; break;
+            case LedColor.Green: ledState.green ^= 1; break;
+
+            case LedColor.All:
+                ledState.red ^= 1;
+                ledState.yellow ^= 1;
+                ledState.green ^= 1;
+                break;
         }
 
-        // Toggle the state and write to pin.
-        state ^= 1;
-        setLed(color, state);
+        // Write to pin.
+        setLed(LedColor.Red, ledState.red);
+        setLed(LedColor.Yellow, ledState.yellow);
+        setLed(LedColor.Green, ledState.green);
     }
 
 
