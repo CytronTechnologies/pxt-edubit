@@ -46,6 +46,7 @@ namespace edubitPotentioBit {
     /**
      * Return potentiometer value (0-1023).
      */
+    //% weight=20
     //% blockGap=8
     //% blockId=edubit_read_pot_value
     //% block="potentiometer value"
@@ -57,8 +58,9 @@ namespace edubitPotentioBit {
     /**
     * Compare the potentiometer value (0-1023) with a number and return the result (true/false).
     * @param compareType More than or less than.
-    * @param threshold The value to compare with.
+    * @param threshold The value to compare with. eg: 512
     */
+    //% weight=19
     //% blockGap=40
     //% blockId=edubit_compare_pot_value
     //% block="potentiometer value %compareType %threshold"
@@ -85,9 +87,10 @@ namespace edubitPotentioBit {
     /**
     * Compare the potentiometer value with a number and do something when true.
     * @param compareType More than or less than.
-    * @param threshold The value to compare with.
+    * @param threshold The value to compare with. eg: 512
     * @param handler Code to run when the event is raised.
     */
+    //% weight=18
     //% blockGap=8
     //% blockId=edubit_potentiometer_event
     //% block="on potentiometer value %compareType %threshold"

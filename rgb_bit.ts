@@ -37,6 +37,7 @@ namespace edubitRgbBit {
     /**
      * Turn off all RGB pixels.
      */
+    //% weight=20
     //% blockGap=8
     //% blockId="edubit_clear_pixels"
     //% block="clear all RGB pixels"
@@ -55,6 +56,7 @@ namespace edubitRgbBit {
      * Set the brightness of the RGB pixels (0-255).
      * @param brightness Pixel brightness. eg: 25
      */
+    //% weight=19
     //% blockGap=40
     //% blockId="edubit_set_brightness"
     //% block="set RGB pixels brightness to %brightness"
@@ -74,6 +76,7 @@ namespace edubitRgbBit {
     /**
      * Show a rainbow pattern on all RGB pixels.
      */
+    //% weight=18
     //% blockGap=8
     //% blockId="edubit_show_rainbow"
     //% block="show rainbow on RGB pixels"
@@ -96,6 +99,7 @@ namespace edubitRgbBit {
      * Show the same color on all RGB pixels. 
      * @param color RGB color of the pixel.
      */
+    //% weight=17
     //% blockGap=8
     //% blockId="edubit_show_color"
     //% block="set all RGB pixels to %color"
@@ -114,6 +118,7 @@ namespace edubitRgbBit {
      * @param pixel The pixel number we want to change the color.
      * @param color RGB color of the pixel.
      */
+    //% weight=16
     //% blockGap=40
     //% blockId="edubit_set_pixel_color"
     //% block="set RGB pixel %pixel to %color"
@@ -129,8 +134,9 @@ namespace edubitRgbBit {
 
     /**
      * Shift the color of RGB pixels (-3 to 3).
-     * @param offset Number of pixels to shift.
+     * @param offset Number of pixels to shift. eg: 1
      */
+    //% weight=15
     //% blockGap=8
     //% blockId="edubit_shift_pixels"
     //% block="shift RGB pixels color by %offset"
@@ -174,8 +180,9 @@ namespace edubitRgbBit {
 
     /**
      * Rotate the color of RGB pixels(-3 to 3).
-     * @param offset Number of pixels to rotate.
+     * @param offset Number of pixels to rotate. eg: 1
      */
+    //% weight=14
     //% blockGap=50
     //% blockId="edubit_rotate_pixels"
     //% block="rotate RGB pixels color by %offset"
@@ -222,6 +229,7 @@ namespace edubitRgbBit {
     /**
      * Return the RGB value of a known color.
     */
+    //% weight=13
     //% blockGap=8
     //% blockId="edubit_colors"
     //% block="%color"
@@ -232,10 +240,11 @@ namespace edubitRgbBit {
 
     /**
      * Converts red, green, blue channels into a RGB color.
-     * @param red Value of the red channel (0 - 255).
-     * @param green Value of the green channel (0 - 255).
-     * @param blue Value of the blue channel (0 - 255).
+     * @param red Value of the red channel (0 - 255). eg: 255
+     * @param green Value of the green channel (0 - 255). eg: 255
+     * @param blue Value of the blue channel (0 - 255). eg: 255
      */
+    //% weight=12
     //% blockGap=30
     //% blockId="edubit_rgb_value"
     //% block="red %red green %green blue %blue"

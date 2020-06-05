@@ -32,6 +32,7 @@ namespace edubitIrBit {
     /**
      * Return IR sensor state (0 or 1).
      */
+    //% weight=20
     //% blockGap=8
     //% blockId=edubit_read_ir_sensor
     //% block="IR sensor state"
@@ -43,6 +44,7 @@ namespace edubitIrBit {
     /**
      * Return true if IR sensor is triggered.
      */
+    //% weight=19
     //% blockGap=40
     //% blockId=edubit_is_ir_sensor_triggered
     //% block="IR sensor triggered"
@@ -61,6 +63,7 @@ namespace edubitIrBit {
     * @param event Event type.
     * @param handler Code to run when the event is raised.
     */
+    //% weight=18
     //% blockGap=8
     //% blockId=edubit_ir_sensor_event
     //% block="on IR sensor %event"

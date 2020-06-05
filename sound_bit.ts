@@ -47,6 +47,7 @@ namespace edubitSoundBit {
      * Return sound level (0-1023).
      * @param pin Pin number for sound sensor.
      */
+    //% weight=20
     //% blockGap=8
     //% blockId=edubit_read_sound_sensor
     //% block="sound level"
@@ -58,8 +59,9 @@ namespace edubitSoundBit {
     /**
     * Compare the sound level (0-1023) with a number and return the result (true/false).
     * @param compareType More than or less than.
-    * @param threshold The value to compare with.
+    * @param threshold The value to compare with. eg: 200
     */
+    //% weight=19
     //% blockGap=40
     //% blockId=edubit_compare_sound_sensor
     //% block="sound level %compareType %threshold"
@@ -87,9 +89,10 @@ namespace edubitSoundBit {
     /**
     * Compare the sound level value with a number and do something when true.
     * @param compareType More than or less than.
-    * @param threshold The value to compare with.
+    * @param threshold The value to compare with. eg: 200
     * @param handler Code to run when the event is raised.
     */
+    //% weight=18
     //% blockGap=8
     //% blockId=edubit_sound_sensor_event
     //% block="on sound level %compareType %threshold"

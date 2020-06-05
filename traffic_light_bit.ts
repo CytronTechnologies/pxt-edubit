@@ -53,6 +53,7 @@ namespace edubitTrafficLightBit {
      * @param color LED color.
      * @param state LED state.
      */
+    //% weight=20
     //% blockGap=8
     //% blockId=edubit_set_led
     //% block="set LED %color to %state"
@@ -86,6 +87,7 @@ namespace edubitTrafficLightBit {
      * Toggle the LED.
      * @param color LED color.
      */
+    //% weight=19
     //% blockGap=8
     //% blockId=edubit_toggle_led
     //% block="Toggle LED %color"

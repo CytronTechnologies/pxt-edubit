@@ -9,7 +9,10 @@
 // Motor channel.
 enum MotorChannel {
     M1 = 0,
-    M2 = 1
+    M2 = 1,
+    
+    //% block="all"
+    All = 1000,
 };
 
 // Motor direction.
@@ -22,7 +25,10 @@ enum MotorDirection {
 enum ServoChannel {
     S1 = REG_ADD_SERVO_1,
     S2 = REG_ADD_SERVO_2,
-    S3 = REG_ADD_SERVO_3
+    S3 = REG_ADD_SERVO_3,
+
+    //% block="all"
+    All = 1000,
 };
 
 
@@ -39,6 +45,7 @@ namespace edubitMotors {
      * @param motor Motor channel. eg: Motor.M1, Motor.M2
      */
     //% group="DC Motors"
+    //% weight=20
     //% blockGap=8
     //% blockId=edubit_brake_motor
     //% block="Brake motor %motor"
@@ -53,6 +60,13 @@ namespace edubitMotors {
                 edubit.i2cWrite(REG_ADD_M2A, 0);
                 edubit.i2cWrite(REG_ADD_M2B, 0);
                 break;
+
+            case MotorChannel.All:
+                edubit.i2cWrite(REG_ADD_M1A, 0);
+                edubit.i2cWrite(REG_ADD_M1B, 0);
+                edubit.i2cWrite(REG_ADD_M2A, 0);
+                edubit.i2cWrite(REG_ADD_M2B, 0);
+                break;
         }
     }
 
@@ -61,9 +75,10 @@ namespace edubitMotors {
      * Run the motor forward or backward (Speed = 0-255).
      * @param motor Motor channel.
      * @param direction Motor direction.
-     * @param speed Motor speed (0-255).
+     * @param speed Motor speed (0-255). eg: 128
      */
     //% group="DC Motors"
+    //% weight=19
     //% blockGap=40
     //% blockId=edubit_run_motor
     //% block="Run motor %motor %direction at speed %speed"
@@ -92,6 +107,21 @@ namespace edubitMotors {
                     edubit.i2cWrite(REG_ADD_M2B, speed);
                 }
                 break;
+
+            case MotorChannel.All:
+                if (direction == MotorDirection.Forward) {
+                    edubit.i2cWrite(REG_ADD_M1A, speed);
+                    edubit.i2cWrite(REG_ADD_M1B, 0);
+                    edubit.i2cWrite(REG_ADD_M2A, speed);
+                    edubit.i2cWrite(REG_ADD_M2B, 0);
+                }
+                else {
+                    edubit.i2cWrite(REG_ADD_M1A, 0);
+                    edubit.i2cWrite(REG_ADD_M1B, speed);
+                    edubit.i2cWrite(REG_ADD_M2A, 0);
+                    edubit.i2cWrite(REG_ADD_M2B, speed);
+                }
+                break;
         }
     }
 
@@ -101,11 +131,19 @@ namespace edubitMotors {
      * @param servo Servo channel.
      */
     //% group="Servos"
+    //% weight=18
     //% blockGap=40
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
     export function disableServo(servo: ServoChannel): void {
-        edubit.i2cWrite(servo, 0);
+        if (servo == ServoChannel.All) {
+            edubit.i2cWrite(ServoChannel.S1, 0);
+            edubit.i2cWrite(ServoChannel.S2, 0);
+            edubit.i2cWrite(ServoChannel.S3, 0);
+        }
+        else {
+            edubit.i2cWrite(servo, 0);
+        }
     }
 
 
@@ -115,6 +153,7 @@ namespace edubitMotors {
      * @param position Servo positon. eg: 90
      */
     //% group="Servos"
+    //% weight=17
     //% blockGap=8
     //% blockId=edubit_set_servo_position
     //% block="Set servo %servo position to %position degrees"
@@ -123,7 +162,14 @@ namespace edubitMotors {
         position = edubit.limit(position, 0, 180);
 
         let pulseWidth = position * 20 / 18 + 50
-        edubit.i2cWrite(servo, pulseWidth);
+        if (servo == ServoChannel.All) {
+            edubit.i2cWrite(ServoChannel.S1, pulseWidth);
+            edubit.i2cWrite(ServoChannel.S2, pulseWidth);
+            edubit.i2cWrite(ServoChannel.S3, pulseWidth);
+        }
+        else {
+            edubit.i2cWrite(servo, pulseWidth);
+        }
     }
 
 
@@ -133,12 +179,21 @@ namespace edubitMotors {
      * @param pulseWidth Pulse width in microseconds. eg: 1500
      */
     //% group="Servos"
+    //% weight=16
     //% blockGap=8
     //% blockId=edubit_set_servo_pulse_width
     //% block="Set servo %servo pulse width to %pulseWidth us"
     //% pulseWidth.min=450 pulseWidth.max=2550
     export function setServoPulseWidth(servo: ServoChannel, pulseWidth: number): void {
         pulseWidth = edubit.limit(pulseWidth, 450, 2550);
-        edubit.i2cWrite(servo, pulseWidth / 10);
+        pulseWidth = pulseWidth / 10;
+        if (servo == ServoChannel.All) {
+            edubit.i2cWrite(ServoChannel.S1, pulseWidth);
+            edubit.i2cWrite(ServoChannel.S2, pulseWidth);
+            edubit.i2cWrite(ServoChannel.S3, pulseWidth);
+        }
+        else {
+            edubit.i2cWrite(servo, pulseWidth);
+        }
     }
 }
