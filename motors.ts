@@ -132,7 +132,7 @@ namespace edubitMotors {
      */
     //% group="Servos"
     //% weight=18
-    //% blockGap=40
+    //% blockGap=8
     //% blockId=edubit_disable_servo
     //% block="Disable servo %servo"
     export function disableServo(servo: ServoChannel): void {
@@ -172,28 +172,4 @@ namespace edubitMotors {
         }
     }
 
-
-    /**
-     * Set the pulse width for servo (450-2550 microseconds).
-     * @param servo Servo channel.
-     * @param pulseWidth Pulse width in microseconds. eg: 1500
-     */
-    //% group="Servos"
-    //% weight=16
-    //% blockGap=8
-    //% blockId=edubit_set_servo_pulse_width
-    //% block="Set servo %servo pulse width to %pulseWidth us"
-    //% pulseWidth.min=450 pulseWidth.max=2550
-    export function setServoPulseWidth(servo: ServoChannel, pulseWidth: number): void {
-        pulseWidth = edubit.limit(pulseWidth, 450, 2550);
-        pulseWidth = pulseWidth / 10;
-        if (servo == ServoChannel.All) {
-            edubit.i2cWrite(ServoChannel.S1, pulseWidth);
-            edubit.i2cWrite(ServoChannel.S2, pulseWidth);
-            edubit.i2cWrite(ServoChannel.S3, pulseWidth);
-        }
-        else {
-            edubit.i2cWrite(servo, pulseWidth);
-        }
-    }
 }

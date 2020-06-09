@@ -115,10 +115,6 @@ basic.forever(function () {
     edubitMotors.setServoPosition(ServoChannel.S1, 0)
     basic.pause(1000)
 
-    // Move Servo 1 to 90 degrees (Pulse width = 1500 us).
-    edubitMotors.setServoPulseWidth(ServoChannel.S1, 1500)
-    basic.pause(1000)
-
     // Disable Servo 1.
     edubitMotors.disableServo(ServoChannel.S1)
 
@@ -126,10 +122,6 @@ basic.forever(function () {
 
     // Move Servo 2 to 180 degrees.
     edubitMotors.setServoPosition(ServoChannel.S2, 180)
-    basic.pause(1000)
-
-    // Move Servo 2 to 90 degrees (Pulse width = 1500 us).
-    edubitMotors.setServoPulseWidth(ServoChannel.S2, 1500)
     basic.pause(1000)
 
     // Disable Servo 2.
@@ -140,9 +132,6 @@ basic.forever(function () {
     // Move Servo 3 to 0 degree.
     edubitMotors.setServoPosition(ServoChannel.S3, 0)
     basic.pause(1000)
-
-    // Move Servo 3 to 180 degrees (Pulse width = 2500 us).
-    edubitMotors.setServoPulseWidth(ServoChannel.S3, 2500)
 
     // Disable Servo 3.
     basic.pause(1000)
