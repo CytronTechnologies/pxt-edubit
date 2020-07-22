@@ -36,6 +36,25 @@ namespace edubit {
 
 
 
+    // Background function to monitor the power switch and reset microbit when power cycled.
+    let oldPowerState = edubitPower.isPowerOn();
+    control.inBackground(function () {
+        while (true) {
+            if (edubitPower.isPowerOn()) {
+                if (oldPowerState == false) {
+                    control.reset();
+                }
+                oldPowerState = true;
+            } else {
+                oldPowerState = false;
+            }
+
+            basic.pause(200);
+        }
+    })
+
+
+
     /**
      * Limit the range of a number.
      * @param value The number we want to limit.
