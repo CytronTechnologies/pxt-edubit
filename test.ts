@@ -51,6 +51,34 @@ basic.forever(function () {
         led.unplot(0, 2)
     }
 
+    // Plot the power input voltage on 4th row LED 1.
+    if (edubitPower.readVin() > 4.0) {
+        led.plot(0, 3);
+    } else {
+        led.unplot(0, 3);
+    }
+
+    // Plot the power state on 4th row LED 2.
+    if (edubitPower.isPowerOn()) {
+        led.plot(1, 3);
+    } else {
+        led.unplot(1, 3);
+    }
+
+    // Plot the low batt state on 4th row LED 3.
+    if (edubitPower.isLowBatt()) {
+        led.plot(2, 3);
+    } else {
+        led.unplot(2, 3);
+    }
+
+    // Plot the overvoltage state on 4th row LED 4.
+    if (edubitPower.isOvervoltage()) {
+        led.plot(3, 3);
+    } else {
+        led.unplot(3, 3);
+    }
+
 
 
     // Show red color on all RGB pixels.

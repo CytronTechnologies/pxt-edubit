@@ -17,6 +17,10 @@ const REG_ADD_M2B = 7;
 const REG_ADD_LB_UTH = 8;
 const REG_ADD_LB_LTH = 9;
 const REG_ADD_OV_TH = 10;
+const REG_ADD_VIN = 11;
+const REG_ADD_PWR_STATE = 12;
+const REG_ADD_LB_STATE = 13;
+const REG_ADD_OV_STATE = 14;
 
 
 
@@ -53,7 +57,22 @@ namespace edubit {
 
 
     /**
-     * I2C write to the register on PIC16F1937.
+     * I2C read from the register of PIC16F1937.
+     * @param register Register address.
+     */
+    //% blockHidden=true
+    //% blockId=edubit_i2c_read
+    export function i2cRead(register: number): number {
+        let value = 0;
+        pins.i2cWriteNumber(I2C_ADDRESS, register, NumberFormat.UInt8LE, true);
+        value = pins.i2cReadNumber(I2C_ADDRESS, NumberFormat.UInt8LE);
+        return value;
+    }
+
+
+
+    /**
+     * I2C write to the register of PIC16F1937.
      * @param register Register address.
      * @param data Data to write.
      */
