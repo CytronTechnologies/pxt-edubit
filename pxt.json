@@ -1,6 +1,6 @@
 {
     "name": "pxt-edubit",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "description": "MakeCode Package for Cytron EDU:BIT",
     "license": "MIT",
     "dependencies": {
@@ -17,7 +17,7 @@
         "sound_bit.ts",
         "rgb_bit.ts",
         "power.ts",
-        "_locales/zh-CN/pxt-edubit-jsdoc-strings.json",
+		"_locales/ja/pxt-edubit-strings.json",
         "_locales/zh-CN/pxt-edubit-strings.json"
     ],
     "testFiles": [
