@@ -17,6 +17,8 @@
         "sound_bit.ts",
         "rgb_bit.ts",
         "power.ts"
+		"_locales/zh-CN/pxt-edubit-jsdoc-strings.json"
+		"_locales/zh-CN/pxt-edubit-strings.json"
     ],
     "testFiles": [
         "test.ts"
