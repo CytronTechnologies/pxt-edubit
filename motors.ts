@@ -17,7 +17,10 @@ enum MotorChannel {
 
 // Motor direction.
 enum MotorDirection {
+    //% block="forward"
     Forward = 0,
+
+    //% block="backward"
     Backward = 1
 };
 

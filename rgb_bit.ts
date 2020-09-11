@@ -12,6 +12,30 @@ const RGB_BIT_PIN = DigitalPin.P13;
 // Number of LEDs in RGB Bit.
 const RGB_BIT_LENGTH = 4;
 
+// RGB Colors
+enum RgbColors {
+    //% block=red
+    Red = 0xFF0000,
+    //% block=orange
+    Orange = 0xFFA500,
+    //% block=yellow
+    Yellow = 0xFFFF00,
+    //% block=green
+    Green = 0x00FF00,
+    //% block=blue
+    Blue = 0x0000FF,
+    //% block=indigo
+    Indigo = 0x4b0082,
+    //% block=violet
+    Violet = 0x8a2be2,
+    //% block=purple
+    Purple = 0xFF00FF,
+    //% block=white
+    White = 0xFFFFFF,
+    //% block=black
+    Black = 0x000000
+}
+
 
 
 /**
@@ -81,10 +105,10 @@ namespace edubitRgbBit {
     //% blockId="edubit_show_rainbow"
     //% block="show rainbow on RGB pixels"
     export function showRainbow(): void {
-        colorsArray[0] = NeoPixelColors.Red;
-        colorsArray[1] = NeoPixelColors.Yellow;
-        colorsArray[2] = NeoPixelColors.Green;
-        colorsArray[3] = NeoPixelColors.Indigo;
+        colorsArray[0] = RgbColors.Red;
+        colorsArray[1] = RgbColors.Yellow;
+        colorsArray[2] = RgbColors.Green;
+        colorsArray[3] = RgbColors.Indigo;
 
         for (let i = 0; i < RGB_BIT_LENGTH; i++) {
             rgbBit.setPixelColor(i, colorsArray[i]);
@@ -233,7 +257,7 @@ namespace edubitRgbBit {
     //% blockGap=8
     //% blockId="edubit_colors"
     //% block="%color"
-    export function colors(color: NeoPixelColors): number {
+    export function colors(color: RgbColors): number {
         return <number>color;
     }
 
