@@ -43,7 +43,7 @@
   "edubitPower.isPowerOn|block": "power on",
   "edubitPower.readVin|block": "power input voltage",
   "edubitPower|block": "Power",
-  "edubitRgbBit.clear|block": "inoltrare",
+  "edubitRgbBit.clear|block": "pulisci tutti i pixel RGB",
   "edubitRgbBit.colors|block": "%color",
   "edubitRgbBit.rgb|block": "rosso %red verde %green blu %blue",
   "edubitRgbBit.rotatePixels|block": "ruota colore dei pixel RGB di %offset",
