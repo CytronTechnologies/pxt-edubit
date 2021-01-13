@@ -70,7 +70,7 @@
   "edubitTrafficLightBit": "Blöcke für Ampel Bit.",
   "edubitTrafficLightBit.digitalStatePicker": "Rufe den digitalen IO state field Editor ab.",
   "edubitTrafficLightBit.digitalStatePicker|param|state": "Digitaler IO State. eg: DigitalIoState.On",
-  "edubitTrafficLightBit.setLed": "Schalte die LED ein/aus (ein = 1, aus = 0).",
+  "edubitTrafficLightBit.setLed": "Schalte die LED an/aus (an = 1, aus = 0).",
   "edubitTrafficLightBit.setLed|param|color": "LED-Farbe.",
   "edubitTrafficLightBit.setLed|param|state": "LED-Status.",
   "edubitTrafficLightBit.toggleLed": "Schalte die LED um.",
