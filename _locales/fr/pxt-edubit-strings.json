@@ -1,6 +1,6 @@
 {
-  "DigitalIoState.Off|block": "éteindre",
-  "DigitalIoState.On|block": "allumer",
+  "DigitalIoState.Off|block": "éteinte(s)",
+  "DigitalIoState.On|block": "allumée(s)",
   "IrEventType.Fall|block": "inactif",
   "IrEventType.Rise|block": "actif",
   "LedColor.All|block": "tous",

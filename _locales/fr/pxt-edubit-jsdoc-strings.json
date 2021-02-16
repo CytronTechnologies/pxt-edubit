@@ -70,7 +70,7 @@
   "edubitTrafficLightBit": "Blocs du feu tricolore (Traffic Light Bit).",
   "edubitTrafficLightBit.digitalStatePicker": "Reçoit de l’éditeur l’état de E/S numérique.",
   "edubitTrafficLightBit.digitalStatePicker|param|state": "Etat de E/S numérique. Par ex :  DigitalIoState.On",
-  "edubitTrafficLightBit.setLed": "Allumer / Eteindre la DEL (On = 1, Off = 0).",
+  "edubitTrafficLightBit.setLed": "Allumer / Eteindre la LED (On = 1, Off = 0).",
   "edubitTrafficLightBit.setLed|param|color": "Couleur de la LED.",
   "edubitTrafficLightBit.setLed|param|state": "Etat de la LED.",
   "edubitTrafficLightBit.toggleLed": "Bascule la LED.",
