@@ -35,9 +35,19 @@ enum RgbColors {
     //% block=black
     Black = 0x000000
 }
-
-
-
+//what rgb pixels you can use
+enum RgbPixelsAvalible {
+    //% block="0"
+    _0,
+    //% block="1"
+    _1, 
+    //% block="2"
+    _2,
+    //% block="3"
+    _3,
+    //% block="all"
+    all,
+}
 /**
  * Blocks for RGB Bit.
  */
@@ -74,8 +84,37 @@ namespace edubitRgbBit {
         rgbBit.show();
         basic.pause(0);
     }
-
-
+    /** 
+     * shows #(color) on rgb pixels (you have to add a # and it has to have a length of 6)
+     */
+    //% weight=0
+    //% blockGap=40
+    //% blockId="edubit_set_pixel_color_hex"
+    //% block="set rgb pixel %pixel to color %color"
+    //% advanced=true
+    export function hex_rgb (pixel: RgbPixelsAvalible, color: string) {
+        if (pixel == RgbPixelsAvalible.all) {
+            edubitRgbBit.showColor(edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
+        } else if (pixel == RgbPixelsAvalible._0) {
+            edubitRgbBit.setPixelColor(0, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
+        } else if (pixel == RgbPixelsAvalible._1) {
+            edubitRgbBit.setPixelColor(1, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
+        } else if (pixel == RgbPixelsAvalible._2) {
+            edubitRgbBit.setPixelColor(2, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
+        } else if (pixel == RgbPixelsAvalible._3) {
+            edubitRgbBit.setPixelColor(3, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
+        }
+    }
+    function convert_from_hex_base_10 (base: number, num: string) {
+        let temp_val = 0
+        for (let index = 0; index <= num.length - 1; index++) {
+            temp_val += ((a_z().indexOf(num.charAt(index))) * base ** (num.length - (index + 1)))
+        } 
+        return temp_val
+    }
+    function a_z() {
+        return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    }
     /**
      * Set the brightness of the RGB pixels (0-255).
      * @param brightness Pixel brightness. eg: 25
