@@ -84,36 +84,34 @@ namespace edubitRgbBit {
         rgbBit.show();
         basic.pause(0);
     }
+    function shortcut (num: number, text: string, l: number) {
+        return convert_from_hex_base_10(16, text.substr(num, l))
+    }
     /** 
-     * shows #(color) on rgb pixels (you have to add a # and it has to have a length of 6)
+     * color in hex
      */
     //% weight=0
     //% blockGap=40
     //% blockId="edubit_set_pixel_color_hex"
-    //% block="set rgb pixel %pixel to color %color"
+    //% block="#|%color"
     //% advanced=true
-    export function hex_rgb (pixel: RgbPixelsAvalible, color: string) {
-        if (pixel == RgbPixelsAvalible.all) {
-            edubitRgbBit.showColor(edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
-        } else if (pixel == RgbPixelsAvalible._0) {
-            edubitRgbBit.setPixelColor(0, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
-        } else if (pixel == RgbPixelsAvalible._1) {
-            edubitRgbBit.setPixelColor(1, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
-        } else if (pixel == RgbPixelsAvalible._2) {
-            edubitRgbBit.setPixelColor(2, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
-        } else if (pixel == RgbPixelsAvalible._3) {
-            edubitRgbBit.setPixelColor(3, edubitRgbBit.rgb(convert_from_hex_base_10(16, color.substr(1, 2)), convert_from_hex_base_10(16, color.substr(3, 2)), convert_from_hex_base_10(16, color.substr(5, 2))))
+    export function hex_rgb (color: string) {
+        if (color.length == 6) {
+            return edubitRgbBit.rgb(shortcut(0, color, 2), shortcut(2, color, 2), shortcut(4, color, 2))
+        } else if (color.length == 3) {
+            return edubitRgbBit.rgb(shortcut(0, color, 1) * 11, shortcut(1, color, 1) * 11, shortcut(2, color, 1) * 11)
         }
+        return 0x00000
     }
     function convert_from_hex_base_10 (base: number, num: string) {
         let temp_val = 0
         for (let index = 0; index <= num.length - 1; index++) {
-            temp_val += ((a_z().indexOf(num.charAt(index))) * base ** (num.length - (index + 1)))
+            temp_val += (((a_z().indexOf(num.charAt(index))) % (a_z().length / 2)) * base ** (num.length - (index + 1)))
         } 
         return temp_val
     }
     function a_z() {
-        return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdefghijklmnopqrstuvwxyz"
     }
     /**
      * Set the brightness of the RGB pixels (0-255).
