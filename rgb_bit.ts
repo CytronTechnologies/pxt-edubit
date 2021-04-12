@@ -35,19 +35,6 @@ enum RgbColors {
     //% block=black
     Black = 0x000000
 }
-//what rgb pixels you can use
-enum RgbPixelsAvalible {
-    //% block="0"
-    _0,
-    //% block="1"
-    _1, 
-    //% block="2"
-    _2,
-    //% block="3"
-    _3,
-    //% block="all"
-    all,
-}
 /**
  * Blocks for RGB Bit.
  */
