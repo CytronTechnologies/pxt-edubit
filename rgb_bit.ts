@@ -35,6 +35,9 @@ enum RgbColors {
     //% block=black
     Black = 0x000000
 }
+
+
+
 /**
  * Blocks for RGB Bit.
  */
@@ -71,8 +74,40 @@ namespace edubitRgbBit {
         rgbBit.show();
         basic.pause(0);
     }
+
+
+    /**
+     * Set the brightness of the RGB pixels (0-255).
+     * @param brightness Pixel brightness. eg: 25
+     */
+    //% weight=19
+    //% blockGap=40
+    //% blockId="edubit_set_brightness"
+    //% block="set RGB pixels brightness to %brightness"
+    //% brightness.min=0 brightness.max=255
+    export function setBrightness(brightness: number): void {
+        rgbBit.setBrightness(brightness);
+
+        // Restore the original color.
+        for (let i = 0; i < RGB_BIT_LENGTH; i++) {
+            rgbBit.setPixelColor(i, colorsArray[i]);
+        }
+        rgbBit.show();
+        basic.pause(0);
+    }
     function shortcut (num: number, text: string, l: number) {
-        return convert_from_hex_base_10(16, text.substr(num, l))
+        return Math.constrain(convert_from_hex_base_10(16, text.substr(num, l)), 0, 255)
+    }
+    /** 
+     * color in hex
+     */
+    //% weight=0
+    //% blockGap=40
+    //% blockId="edubit_set_pixel_color_HEX"
+    //% block="red:|$R|green:|$G|blue:|$B"
+    //% advanced=true
+    export function hex_RGB (R: string, G: string, B: string) {
+        return hex_rgb("" + R + G + B)
     }
     /** 
      * color in hex
@@ -100,26 +135,6 @@ namespace edubitRgbBit {
     function a_z() {
         return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdefghijklmnopqrstuvwxyz"
     }
-    /**
-     * Set the brightness of the RGB pixels (0-255).
-     * @param brightness Pixel brightness. eg: 25
-     */
-    //% weight=19
-    //% blockGap=40
-    //% blockId="edubit_set_brightness"
-    //% block="set RGB pixels brightness to %brightness"
-    //% brightness.min=0 brightness.max=255
-    export function setBrightness(brightness: number): void {
-        rgbBit.setBrightness(brightness);
-
-        // Restore the original color.
-        for (let i = 0; i < RGB_BIT_LENGTH; i++) {
-            rgbBit.setPixelColor(i, colorsArray[i]);
-        }
-        rgbBit.show();
-        basic.pause(0);
-    }
-
 
     /**
      * Show a rainbow pattern on all RGB pixels.
@@ -309,4 +324,3 @@ namespace edubitRgbBit {
     }
 
 }
-
