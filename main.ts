@@ -33,6 +33,9 @@ namespace edubit {
     edubitMotors.disableServo(ServoChannel.S1);
     edubitMotors.disableServo(ServoChannel.S2);
     edubitMotors.disableServo(ServoChannel.S3);
+	
+	// Set the music silence level to 0 (For V2 only).
+	music.setSilenceLevel(0)
 
 
 
