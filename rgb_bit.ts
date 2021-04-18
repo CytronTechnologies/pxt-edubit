@@ -121,7 +121,7 @@ namespace edubitRgbBit {
         if (color.length == 6) {
             return edubitRgbBit.rgb(shortcut(0, color, 2), shortcut(2, color, 2), shortcut(4, color, 2))
         } else if (color.length == 3) {
-            return edubitRgbBit.rgb(shortcut(0, color, 1) * 11, shortcut(1, color, 1) * 11, shortcut(2, color, 1) * 11)
+            return edubitRgbBit.rgb(shortcut(0, color, 1) * 17, shortcut(1, color, 1) * 17, shortcut(2, color, 1) * 17)
         }
         return 0x00000
     }
