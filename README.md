@@ -1,6 +1,6 @@
 # EDU:BIT Extension for Microsoft MakeCode
 
-This library provides the driver for [**EDU:BIT** EDU Training & Project Kit for micro:bit](https://www.cytron.io/p-edu-bit). EDU:BIT works with micro:bit V1 & V2.
+This library provides the driver for [**EDU:BIT** EDU Training & Project Kit for micro:bit](https://www.cytron.io/p-edu-bit). EDU:BIT works with **micro:bit V1 & V2**.
 
 ![EDU:BIT](https://raw.githubusercontent.com/CytronTechnologies/pxt-edubit/master/icon.png)
 
