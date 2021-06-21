@@ -1,6 +1,6 @@
 {
     "name": "pxt-edubit",
-    "version": "1.11.1",
+    "version": "1.11.2",
     "description": "MakeCode Package for Cytron EDU:BIT",
     "license": "MIT",
     "dependencies": {
