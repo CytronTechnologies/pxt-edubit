@@ -231,13 +231,13 @@ Button A+B pressed - Disable Servo 1. No pulse is sent to Servo 1 and it can be 
 
 ```blocks
 input.onButtonPressed(Button.A, function () {
-    rekabit.setServoPosition(ServoChannel.S1, 0)
+    edubitMotors.setServoPosition(ServoChannel.S1, 0)
 })
 input.onButtonPressed(Button.B, function () {
-    rekabit.setServoPosition(ServoChannel.S1, 180)
+    edubitMotors.setServoPosition(ServoChannel.S1, 180)
 })
 input.onButtonPressed(Button.AB, function () {
-    rekabit.disableServo(ServoChannel.S1)
+    edubitMotors.disableServo(ServoChannel.S1)
 })
 ```
 
