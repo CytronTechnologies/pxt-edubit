@@ -95,47 +95,8 @@ namespace edubitRgbBit {
         rgbBit.show();
         basic.pause(0);
     }
-    function shortcut (num: number, text: string, l: number) {
-        return Math.constrain(convert_from_hex_base_10(16, text.substr(num, l)), 0, 255)
-    }
-    /** 
-     * color in hex
-     */
-    //% weight=0
-    //% blockGap=40
-    //% blockId="edubit_set_pixel_color_HEX"
-    //% block="red:|$R|green:|$G|blue:|$B"
-    //% advanced=true
-    export function hex_RGB (R: string, G: string, B: string) {
-        return hex_rgb("" + R + G + B)
-    }
-    /** 
-     * color in hex
-     */
-    //% weight=0
-    //% blockGap=40
-    //% blockId="edubit_set_pixel_color_hex"
-    //% block="#|%color"
-    //% advanced=true
-    export function hex_rgb (color: string) {
-        if (color.length == 6) {
-            return edubitRgbBit.rgb(shortcut(0, color, 2), shortcut(2, color, 2), shortcut(4, color, 2))
-        } else if (color.length == 3) {
-            return edubitRgbBit.rgb(shortcut(0, color, 1) * 17, shortcut(1, color, 1) * 17, shortcut(2, color, 1) * 17)
-        }
-        return 0x00000
-    }
-    function convert_from_hex_base_10 (base: number, num: string) {
-        let temp_val = 0
-        for (let index = 0; index <= num.length - 1; index++) {
-            temp_val += (((a_z().indexOf(num.charAt(index))) % (a_z().length / 2)) * base ** (num.length - (index + 1)))
-        } 
-        return temp_val
-    }
-    function a_z() {
-        return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdefghijklmnopqrstuvwxyz"
-    }
-
+    
+    
     /**
      * Show a rainbow pattern on all RGB pixels.
      */
@@ -323,4 +284,44 @@ namespace edubitRgbBit {
         return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
     }
 
+
+    /** 
+     * Helper to converts hexadecimal to integer.
+    */
+    function convert_hex_to_int(hex_color: string): number {
+        return parseInt(hex_color, 16)
+    }
+    
+
+    /** 
+     * Converts hexadecimal string to color format.
+     * @param color Hex value (0x000000 - 0xFFFFFF). eg: "FFFFFF"
+    */
+    //% weight=11
+    //% blockGap=8
+    //% blockId="edubit_colors_hex"
+    //% block="#|%color"
+    //% advanced=true
+    export function colors_hex(color: string): number {
+        if (color.length == 6) {
+            return edubit.limit(convert_hex_to_int(color), 0, 16777215)
+        }
+        return 0x000000
+    }
+
+
+    /** 
+     * Converts red, green, blue channels in hexadecimal into RGB color.
+     * @param red Hex value of the red channel (0x00 - 0xFF). eg: "FF"
+     * @param green Hex value of the green channel (0x00 - 0xFF). eg: "FF"
+     * @param blue Hex value of the blue channel (0x00 - 0xFF). eg: "FF"
+    */
+    //% weight=10
+    //% blockGap=50
+    //% blockId="edubit_rgb_value_hex"
+    //% block="red %red green %green blue %blue"
+    //% advanced=true
+    export function rgb_hex(red: string, green: string, blue: string): number {
+        return edubitRgbBit.rgb(convert_hex_to_int(red), convert_hex_to_int(green), convert_hex_to_int(blue))
+    }
 }
