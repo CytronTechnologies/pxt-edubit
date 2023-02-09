@@ -15,7 +15,7 @@ Visit [EDU:BIT Resource Hub](https://sites.google.com/cytron.io/edubit-resource-
 * click on **New Project** and give your project a meaningful name
 * click on **Extensions** under the gearwheel :gear: menu
 * search for '**edubit**' or "**https://github.com/cytrontechnologies/pxt-edubit**" 
-* click on the zoombit card to install the extension
+* click on the edubit card to install the extension
   
   
 # Examples  
