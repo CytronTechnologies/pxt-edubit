@@ -5,7 +5,8 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "neopixel": "github:microsoft/pxt-neopixel#v0.6.12"
+        "neopixel": "github:microsoft/pxt-neopixel#v0.6.12",
+        "microphone": "*"
     },
     "files": [
         "README.md",
@@ -17,23 +18,27 @@
         "sound_bit.ts",
         "rgb_bit.ts",
         "power.ts",
-		"_locales/de/pxt-edubit-strings.json",
-		"_locales/de/pxt-edubit-jsdoc-strings.json",
-		"_locales/es/pxt-edubit-strings.json",
-		"_locales/es/pxt-edubit-jsdoc-strings.json",
-		"_locales/fr/pxt-edubit-strings.json",
-		"_locales/fr/pxt-edubit-jsdoc-strings.json",
-		"_locales/it/pxt-edubit-strings.json",
-		"_locales/it/pxt-edubit-jsdoc-strings.json",
-		"_locales/ja/pxt-edubit-strings.json",
-		"_locales/ja/pxt-edubit-jsdoc-strings.json",
-		"_locales/ko/pxt-edubit-strings.json",
+        "_locales/de/pxt-edubit-strings.json",
+        "_locales/de/pxt-edubit-jsdoc-strings.json",
+        "_locales/es/pxt-edubit-strings.json",
+        "_locales/es/pxt-edubit-jsdoc-strings.json",
+        "_locales/fr/pxt-edubit-strings.json",
+        "_locales/fr/pxt-edubit-jsdoc-strings.json",
+        "_locales/it/pxt-edubit-strings.json",
+        "_locales/it/pxt-edubit-jsdoc-strings.json",
+        "_locales/ja/pxt-edubit-strings.json",
+        "_locales/ja/pxt-edubit-jsdoc-strings.json",
+        "_locales/ko/pxt-edubit-strings.json",
         "_locales/zh-CN/pxt-edubit-strings.json"
     ],
     "testFiles": [
         "test.ts"
     ],
     "public": true,
+    "targetVersions": {
+        "target": "6.0.15",
+        "targetId": "microbit"
+    },
     "supportedTargets": [
         "microbit"
     ],
