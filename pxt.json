@@ -28,6 +28,8 @@
 		"_locales/ja/pxt-edubit-strings.json",
 		"_locales/ja/pxt-edubit-jsdoc-strings.json",
 		"_locales/ko/pxt-edubit-strings.json",
+        "_locales/pt/pxt-edubit-strings.json",
+        "_locales/pt/pxt-edubit-jsdoc-strings.json",
         "_locales/zh-CN/pxt-edubit-strings.json"
     ],
     "testFiles": [
